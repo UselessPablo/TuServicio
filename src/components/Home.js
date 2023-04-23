@@ -1,19 +1,33 @@
 import React from 'react'
-import NavBar from './NavBar'
-import { Grid,Box } from '@mui/material'
+
+import { Grid,Box, Button } from '@mui/material'
 import ConstructionRoundedIcon from '@mui/icons-material/ConstructionRounded';
 import WaterDropRoundedIcon from '@mui/icons-material/WaterDropRounded';
 import PropaneTankRoundedIcon from '@mui/icons-material/PropaneTankRounded';
 import BuildRoundedIcon from '@mui/icons-material/BuildRounded';
 import FormatPaintRoundedIcon from '@mui/icons-material/FormatPaintRounded';
+import { useNavigate } from 'react-router-dom';
+
 
 const Home = () => {
+   
+  const navigate = useNavigate();
+  
+const goToAgua =()=>{
+  navigate('/DetalleAgua')
+}
+
   return (
     <> 
-    <NavBar/>
+   
       <Grid container spacing={1} sx={{pr:1,pl:1}}>
       <Grid item xs={4}  >
-          <Box sx={{ backgroundColor: 'blue', height: 240, mt: 1, display: "flex", justifyContent: "center", alignItems: 'center' }}><WaterDropRoundedIcon sx={{ width: "80%", height: "80%", color: 'white' }} /></Box>
+          <Box sx={{ backgroundColor: 'blue', height: 240, mt: 1, display: "flex", justifyContent: "center", alignItems: 'center' }}> 
+          <Button onClick={goToAgua}>
+          <WaterDropRoundedIcon sx={{ width: "80%", height: "80%", color: 'white' }} />
+          </Button>
+          </Box>
+       
       </Grid>
         <Grid item xs={8}>
           <Box sx={{ backgroundColor: 'green', height: 240, mt: 1, display: "flex", justifyContent: "center", alignItems: 'center' }}>

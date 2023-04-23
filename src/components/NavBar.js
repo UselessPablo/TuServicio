@@ -2,6 +2,7 @@
 import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
+
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
@@ -22,21 +23,31 @@ import PropaneTankRoundedIcon from '@mui/icons-material/PropaneTankRounded';
 import BuildRoundedIcon from '@mui/icons-material/BuildRounded';
 import ContactsRoundedIcon from '@mui/icons-material/ContactsRounded';
 import FormatPaintRoundedIcon from '@mui/icons-material/FormatPaintRounded';
-
+import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
+import { useNavigate } from 'react-router-dom';
+import { CardHeader } from '@mui/material';
 const NavBar = () => {
     const [state, setState] = useState({ left: false });
-
+    const navigate = useNavigate();
+   
     const toggleDrawer = (anchor, open) => {
         setState({ ...state, [anchor]: open });
     };
-
+const goHome = () => {
+navigate ('/');
+    toggleDrawer('left', false);
+}
+const goPlomeria = () =>{
+    navigate('/DetalleAgua')
+    toggleDrawer('left', false);
+}
     return (
-        <Box sx={{ flexGrow: 1 }}>
-            <AppBar position="static">
+        <Box sx={{ flexGrow: 1, backgroundColor: 'primary.main', padding: 1, borderRadius: 2 }}>
+            <AppBar position="static" sx={{ backgroundColor: 'pop.main', borderRadius: 2 }}>
                 <Toolbar>
                     <IconButton
-                        size="small"
-                        edge="start"
+                        size="medium"
+                        edge="left"
                         color="inherit"
                         aria-label="menu"
                         sx={{ mr: 2 }}
@@ -51,24 +62,14 @@ const NavBar = () => {
                 </Toolbar>
             </AppBar>
             <Drawer anchor="left" open={state.left} onClose={() => toggleDrawer('left', false)}>
-                <List sx={{mt:6}}>
-                    {[
-                        { text: 'Plomería', icon: <WaterDropRoundedIcon sx={{color:'blue'}} /> },
-                        { text: 'Gas', icon: <PropaneTankRoundedIcon sx={{color: 'cyan' }} /> },
-                        { text: 'Reparaciones', icon: <BuildRoundedIcon sx={{color:'orangeRed'}} /> },
-                        { text: 'Construcción', icon: <ConstructionRoundedIcon sx={{color:'green'}} /> },
-                    { text: 'Pintura', icon: <FormatPaintRoundedIcon sx={{ color: 'black' }} /> }
-                    ].map((item) => (
-                        <ListItem key={item.text} disablePadding>
-                            <ListItemButton>
-                                <ListItemIcon>
-                                    {item.icon}
-                                </ListItemIcon>
-                                <ListItemText primary={item.text} />
-                            </ListItemButton>
-                        </ListItem>
-                    ))}
-                </List>
+                <Box sx={{mt:6, display:'flex', flexDirection:'column', justifyContent:'start' , alignItems:'center'}}>
+                    <Button onClick={goHome} size='small' color='grey'   sx={{ fontSize:'0.8rem', fontWeight:'bold'}} ><HomeRoundedIcon  sx={{ color: 'teal', mb: 1,mr:2 }} />Inicio</Button>       
+                    <Button onClick={goPlomeria} size='small' color='grey' sx={{ fontSize: '0.7rem', mr: 11, mt: 1 }}>  <WaterDropRoundedIcon sx={{ color: 'blue', mr: 2 }} /> Agua    </Button> 
+                    <Button size='small' color='grey' sx={{ fontSize: '0.7rem', mr: 12, mt: 1 }}>  <PropaneTankRoundedIcon sx={{ color: 'cyan', mr: 2 }} /> Gas </Button> 
+                    <Button size='small' color='grey' sx={{ fontSize: '0.7rem', mr: 3, mt: 1 }}><BuildRoundedIcon sx={{ color: 'orangeRed', mr: 2 }} />  Reparaciones   </Button> 
+                    <Button size='small' color='grey' sx={{ fontSize: '0.7rem', mr: 2, mt: 1 }}> <ConstructionRoundedIcon sx={{ color: 'green', mr: 2 }} />Construcción  </Button> 
+                    <Button size='small' color='grey' sx={{ fontSize: '0.7rem', mr: 7, mt: 1, mb: 2 }}>  <FormatPaintRoundedIcon sx={{ color: 'black', mr: 2 }} /> Pintura   </Button>     
+                </Box>
                 <Divider />
                 <List>
                     {['Contacto', 'Email'].map((text, index) => (
@@ -83,12 +84,13 @@ const NavBar = () => {
                     ))}
                 </List>
             </Drawer>
-        
-        <header>
-                <Typography variant='h5' sx={{textAlign:'center',mt:2,mb:2}}>En esta página podrás encontrar el servicio que necesitas, ya sea reparaciones simples, como construcción de vivienda.</Typography>
-        </header>
+            <h2>
+               En esta página podrás encontrar el servicio que necesitas, ya sea reparaciones simples, como construcción de vivienda
+            </h2>
+    
         </Box>
-    );
+ 
+   );
 };
 
 export default NavBar;

@@ -1,7 +1,7 @@
 
 import './App.css';
 import Router from './utils/Router';
-import {teal, green, orange, yellow, lightGreen} from '@mui/material/colors';
+import {teal, green, lime, yellow, lightGreen, grey, orange} from '@mui/material/colors';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 
 
@@ -10,7 +10,7 @@ function App() {
     palette: {
       primary: {
         // teal and green play nicely together.
-        main: teal[400],
+        main: teal[100],
       },
       secondary: {
         main: yellow[400],
@@ -19,26 +19,29 @@ function App() {
         main: lightGreen[700],
       },
       info: {
-        main: teal[500],
+        main: teal[600],
       },
       info2: {
-        main: teal[100],
+        main: teal[300],
       },
       fondo: {
         main: green[400],
       },
       eliminar:{
-        main:orange[600],
+        main:lime[900],
       },
       pop:{
-        main:yellow[800],
+        main:orange[400],
       },
  fondoDrawer: {
-         main: green[200],
+         main: teal[200],
        },
        fondoCard: {
-        main:lightGreen[100],
+        main:lightGreen[600],
        },
+     grey: {
+       main: grey[900],
+     },
     },
   })
  
