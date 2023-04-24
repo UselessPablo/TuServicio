@@ -77,7 +77,7 @@ const info = () =>{
                     <Typography variant="h6" component="div" textAlign='center' fontWeight='bold' sx={{ flexGrow: 1 }}>
                         TuServicio 
                     </Typography>
-                    <SearchBar />
+                   
                     <Button onClick={info} color='error' variant='contained' size='small' sx={{mr:1}}>info</Button>
                     <Button color="success" variant='contained' size='small'>Login</Button>
                    
@@ -110,8 +110,9 @@ const info = () =>{
                     ))}
                 </List>
             </Drawer>
-           <Box sx={{display:'inline'}}>
-            <h2>
+           <Box sx={{display:'flex', justifyContent:'center', flexDirection:'column', alignContent:'center'}}>
+                <SearchBar />
+           <h2>
                En esta página podrás encontrar el servicio que necesitas, ya sea reparaciones simples, como construcción de vivienda
             </h2>
             </Box>

@@ -55,7 +55,7 @@ const goDetalles= ()=>{
         }
     };
     return (
-        <Box sx={{ width: 250, display: 'flex', justifyContent: 'center' }}>
+        <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
             {selectedEmpleado ? (
                 <Button onClick={goDetalles}>
                     <h2>{selectedEmpleado.nombre}</h2>
@@ -89,7 +89,7 @@ const goDetalles= ()=>{
                         <TextField
                             {...params}
                             label='Buscar...'
-                            sx={{ width: 150, mb: 2 }}
+                            sx={{ width: 220, mb: 2,mt:2, display:'flex', justifyContent:'center' }}
                             color='info'
                             value={searchTerm}
                             variant='standard'
