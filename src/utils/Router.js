@@ -5,9 +5,10 @@ import DetallePlomeria from '../components/DetallePlomeria'
 import Info from '../components/Info';
 import Gas from '../components/Gas';
 import DetalleReparaciones from '../components/DetalleReparaciones';
+import DetalleConstruccion from '../components/DetalleConstruccion';
 
 const Router = () => (
-  
+
     <HashRouter basename="/">
         <Routes>
             <Route path="/" element={<Layout />}>
@@ -15,6 +16,7 @@ const Router = () => (
          <Route path='/DetalleAgua/' element={<DetallePlomeria/>} />
          <Route path='/Gasistas/' element={<Gas/>}/>
          <Route path='/Reparaciones' element={<DetalleReparaciones/>} />
+         <Route path='/Construccion' element={<DetalleConstruccion/>}/>
          <Route path='/Info' element={<Info/>}/>
             </Route>
         </Routes>

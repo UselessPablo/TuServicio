@@ -1,15 +1,15 @@
 import React from 'react'
-import { useState, useEffect } from 'react';
-import { collection, getDocs, query, where} from 'firebase/firestore';
-import {db} from '../utils/Firebase'
-import Plomeria from '../components/Plomeria';
+import {useState, useEffect} from 'react';
+import {collection, getDocs, query, where} from 'firebase/firestore';
+import {db} from '../utils/Firebase';
+import Construccion from './Construccion';
 
-const DetallePlomeria = () => {
+const DetalleConstruccion = () => {
 
     const [data, setData] = useState([]);
 
     useEffect(() => {
-        const q = query(collection(db, 'empleados'), where('categoria', '==', 'plomero'));
+        const q = query(collection(db, 'empleados'), where('categoria', '==', 'constructor'));
         getDocs(q)
             .then((querySnapshot) => {
                 const data = querySnapshot.docs.map((doc) => ({
@@ -24,8 +24,8 @@ const DetallePlomeria = () => {
     }, []);
    
             return (
-       <Plomeria data={data} />
+       <Construccion data={data} />
     )
 }
 
-export default DetallePlomeria
+export default DetalleConstruccion

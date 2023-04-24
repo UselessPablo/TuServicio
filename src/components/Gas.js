@@ -8,7 +8,7 @@ const Gas = () => {
     const [data, setData] = useState([]);
    
     useEffect(() => {
-        const q = query(collection(db, 'empleados'), where('categoria', '==', 'Gasista'));
+        const q = query(collection(db, 'empleados'), where('categoria', '==', 'gasista'));
         getDocs(q)
             .then((querySnapshot) => {
                 const data = querySnapshot.docs.map((doc) => ({

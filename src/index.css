@@ -17,3 +17,10 @@ h2{
   font-weight: 400;
   width: 100%;
 }
+.MuiAutocomplete-noOptions {
+    display: none;
+   
+}
+.mini{
+  width: 40px;
+}
