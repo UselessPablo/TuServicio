@@ -5,6 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: 'none';
 }
 
 code {
@@ -13,5 +14,6 @@ code {
 }
 h2{
   text-align: center;
-
+  font-weight: 400;
+  width: 100%;
 }

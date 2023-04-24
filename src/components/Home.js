@@ -21,27 +21,29 @@ const goToAgua =()=>{
     <> 
    
       <Grid container spacing={1} sx={{pr:1,pl:1}}>
-      <Grid item xs={4}  >
-          <Box sx={{ backgroundColor: 'blue', height: 240, mt: 1, display: "flex", justifyContent: "center", alignItems: 'center' }}> 
+      <Grid item xs={6}  >
+          <Box sx={{ backgroundColor: 'blue', height: 200, mt: 1, display: "flex", justifyContent: "center", alignItems: 'center' }}> 
           <Button onClick={goToAgua}>
-          <WaterDropRoundedIcon sx={{ width: "80%", height: "80%", color: 'white' }} />
+              <span title='Plomería' >
+          <WaterDropRoundedIcon sx={{ width: "70%", height: "80%", color: 'white' }} />
+              </span>
           </Button>
           </Box>
        
       </Grid>
-        <Grid item xs={8}>
-          <Box sx={{ backgroundColor: 'green', height: 240, mt: 1, display: "flex", justifyContent: "center", alignItems: 'center' }}>
-            <ConstructionRoundedIcon sx={{ width: "80%", height: "80%", color: 'white' }} />
+        <Grid item xs={6}>
+          <Box sx={{ backgroundColor: 'green', height: 200, mt: 1, display: "flex", justifyContent: "center", alignItems: 'center' }}>
+            <ConstructionRoundedIcon sx={{ width: "80%", height: "80%", color: 'white' }} /> 
           </Box>
         </Grid>
         <Grid item xs={6}>
-          <Box sx={{ backgroundColor: 'red', height: 240, mb: 1, display: "flex", justifyContent: "center", alignItems: 'center' }}>  <PropaneTankRoundedIcon sx={{ width: "80%", height: "80%", color: 'white' }} /> </Box>
+          <Box sx={{ backgroundColor: 'red', height: 200, mb: 1, display: "flex", justifyContent: "center", alignItems: 'center' }}>  <PropaneTankRoundedIcon sx={{ width: "80%", height: "80%", color: 'white' }} /> </Box>
         </Grid>
         <Grid item xs={6}>
-          <Box sx={{ backgroundColor: 'yellow', height: 240, mb: 1, display: "flex", justifyContent: "center", alignItems: 'center' }}>  <BuildRoundedIcon sx={{ width: "80%", height: "80%", color: 'white' }} /> </Box>
+          <Box sx={{ backgroundColor: 'yellow', height: 200, mb: 1, display: "flex", justifyContent: "center", alignItems: 'center' }}>  <BuildRoundedIcon sx={{ width: "80%", height: "80%", color: 'white' }} /> </Box>
         </Grid>
         <Grid item xs={12}>
-          <Box sx={{ backgroundColor: 'orange', height: 120, mb: 1, display: "flex", justifyContent: "center", alignItems: 'center' }}>  <FormatPaintRoundedIcon sx={{ width: "80%", height: "80%", color: 'white' }} /> </Box>
+          <Box sx={{ backgroundColor: 'orange', height: 120, mb: 2, display: "flex", justifyContent: "center", alignItems: 'center' }}>  <FormatPaintRoundedIcon sx={{ width: "80%", height: "80%", color: 'white' }} /> </Box>
         </Grid>
   
     </Grid>
