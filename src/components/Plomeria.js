@@ -10,19 +10,20 @@ import Collapse from '@mui/material/Collapse';
 import Avatar from '@mui/material/Avatar';
 import IconButton, { IconButtonProps } from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import { teal } from '@mui/material/colors';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import Rating from '@mui/material/Rating';
+import { random } from 'lodash';
 
 
 const Plomeria = ({ data }) => {
     const [datos, setDatos] = useState([]);
     const [expanded, setExpanded] = React.useState({});
     const [ratings, setRatings] = React.useState({});
- 
+    const getRandomColor = () => `#${Math.floor(random(0, 16777215)).toString(16)}`;
+    
     useEffect(() => {
         setDatos(data);
 
@@ -61,14 +62,14 @@ const Plomeria = ({ data }) => {
     return (
        
         <>
-            <Typography textAlign='center' variant='h6' sx={{ padding: 1, borderRadius: 2, width: '180px', margin: '0 auto', mt:2 }}> Plomería</Typography>
-            <Box sx={{ display: 'flex', flexWrap: 'wrap', m: 1 }}>
+            <Typography textAlign='center' variant='h6' sx={{ padding: 1, borderRadius: 2, width: '180px', margin: '0 auto', mt: 2 }}> Plomeros</Typography>
+            <Box sx={{ display: 'flex', flexWrap: 'wrap', m: 1, justifyContent:'center' }}>
                 {datos.map((dato) => (
                     <Box key={dato.id} sx={{ width: '100%', maxWidth: 180, m: 1 }}>
                         <Card>
                         <CardHeader
                             avatar={
-                                <Avatar sx={{ bgcolor: teal[300] }} aria-label={dato.nombre}>
+                                    <Avatar sx={{ bgcolor: getRandomColor(), width:30, height:30 }} aria-label={dato.nombre}>
                                     {dato.letra}
                                 </Avatar>
                             }

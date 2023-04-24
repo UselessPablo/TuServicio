@@ -1,15 +1,14 @@
-import React from 'react'
+import React from 'react';
 import { useState, useEffect } from 'react';
-import { collection, getDocs, query, where} from 'firebase/firestore';
-import {db} from '../utils/Firebase'
-import Plomeria from '../components/Plomeria';
+import { getDocs, collection, query, where } from 'firebase/firestore';
+import { db } from '../utils/Firebase';
+import Gasistas from './Gasistas';
 
-const DetallePlomeria = () => {
-
+const Gas = () => {
     const [data, setData] = useState([]);
-
+   
     useEffect(() => {
-        const q = query(collection(db, 'empleados'), where('categoria', '==', 'Plomero'));
+        const q = query(collection(db, 'empleados'), where('categoria', '==', 'Gasista'));
         getDocs(q)
             .then((querySnapshot) => {
                 const data = querySnapshot.docs.map((doc) => ({
@@ -23,9 +22,12 @@ const DetallePlomeria = () => {
             });
     }, []);
    
-            return (
-       <Plomeria data={data} />
-    )
-}
+    
 
-export default DetallePlomeria
+    return (
+        <Gasistas data={data}/>
+        
+    );
+};
+
+export default Gas;
