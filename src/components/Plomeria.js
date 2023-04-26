@@ -26,7 +26,6 @@ const Plomeria = ({ data }) => {
     
     useEffect(() => {
         setDatos(data);
-
     }, [data])
 
         

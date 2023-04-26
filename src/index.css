@@ -24,3 +24,6 @@ h2{
 .mini{
   width: 40px;
 }
+.disable{
+  display: none;
+}

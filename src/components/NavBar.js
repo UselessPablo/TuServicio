@@ -8,7 +8,7 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import Drawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
@@ -25,42 +25,55 @@ import ContactsRoundedIcon from '@mui/icons-material/ContactsRounded';
 import FormatPaintRoundedIcon from '@mui/icons-material/FormatPaintRounded';
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 import { useNavigate } from 'react-router-dom';
-import Info from './Info';
 import SearchBar from './SearchBar';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 
 const NavBar = () => {
     const [state, setState] = useState({ left: false });
     const navigate = useNavigate();
+    const [currentPage, setCurrentPage] = useState("");
    
     const toggleDrawer = (anchor, open) => {
         setState({ ...state, [anchor]: open });
     };
-const goHome = () => {
-navigate ('/');
+
+
+   
+    const goHome = (page) => {
+navigate ('/Home');
     toggleDrawer('left', false);
+        setCurrentPage('/');
 }
 const goPlomeria = () =>{
     navigate('/DetalleAgua')
     toggleDrawer('left', false);
+    setCurrentPage('/DetalleAgua');
 }
     const goGasista = () => {
         navigate('/Gasistas')
         toggleDrawer('left', false);
+        setCurrentPage('/Gasistas');
     }
     const goReparaciones= () => {
         navigate('/Reparaciones')
         toggleDrawer('left', false);
+        setCurrentPage('/Reparaciones');
     }
     const goConstruccion = () => {
         navigate('/Construccion')
         toggleDrawer('left', false);
+        setCurrentPage('/Construccion');
     }
+ 
 const info = () =>{
   navigate('/Info') 
 }
+
     return (
-        <Box sx={{ flexGrow: 1, padding: 1,width:'98%'}}>
+        
+            
+       <Box sx={{ flexGrow: 1, padding: 1,width:'98%'}}>
             <AppBar position="sticky" elevation='0' sx={{ backgroundColor: 'transparent', border:'none'}}>
                 <Toolbar>
                     <IconButton
@@ -85,7 +98,9 @@ const info = () =>{
             </AppBar>
             <Drawer anchor="left" open={state.left} onClose={() => toggleDrawer('left', false)}>
                 <List sx={{mt:2, display:'flex', flexDirection:'column', justifyContent:'start' , alignItems:'center'}}>
-                    <Button onClick={goHome} size='small' color='grey'   sx={{ fontSize:'0.8rem', fontWeight:'bold'}} ><HomeRoundedIcon  sx={{ color: 'teal',mr:2 }} />Inicio</Button> 
+                           
+                    <Button onClick={goHome} size='small' color='grey' sx={{ fontSize: '0.8rem', fontWeight: 'bold' }} ><HomeRoundedIcon sx={{ color: 'teal', mr: 2, backgroundColor: currentPage === '/' ? '#E8F5E9' : 'transparent' }} />Inicio</Button> 
+                           
                 </List>
                     <List sx={{ mt: 6, display: 'flex', flexDirection: 'column', justifyContent: 'start', alignItems: 'center' }}>  
                     <Button onClick={goPlomeria} size='small' color='grey' sx={{ fontSize: '0.7rem', mr: 8}}>  <WaterDropRoundedIcon sx={{ color: 'blue', mr: 2 }} />Plomería</Button> 
@@ -117,7 +132,8 @@ const info = () =>{
             </h2>
             </Box>
         </Box>
- 
+            
+        
    );
 };
 

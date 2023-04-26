@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import TextField from '@mui/material/TextField';
-import { Box, Button } from '@mui/material';
+import { Box} from '@mui/material';
 import Autocomplete from '@mui/material/Autocomplete';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate} from 'react-router-dom';
 import { getFirestore, collection, getDocs, query,  orderBy,where} from 'firebase/firestore';
 import SearchIcon from '@mui/icons-material/Search';
 import InputAdornment from '@mui/material/InputAdornment';
@@ -11,11 +11,12 @@ import InputAdornment from '@mui/material/InputAdornment';
 function SearchBar() {
     const [searchTerm, setSearchTerm] = useState('');
     const [options, setOptions] = useState([]);
-    const [selectedItemId, setSelectedItemId] = useState(null);
+    const [selectedItemId, setSelectedItemId] = useState();
     const navigate = useNavigate();
     const [searchOpen, setSearchOpen] = useState(true);
-    const [selectedEmpleado, setSelectedEmpleado] = useState(null);
-
+    const [selectedEmpleado, setSelectedEmpleado] = useState();
+    const [selectedItemValid, setSelectedItemValid] = useState(false);
+    
     useEffect(() => {
         const querydb = getFirestore();
         const queryCollection = collection(querydb, 'empleados');
@@ -41,28 +42,31 @@ function SearchBar() {
         }
     }, [searchTerm]);
     
-const goDetalles= ()=>{
-    navigate('detalle')
-}
+    console.log(selectedItemId);
+    useEffect(() => {
+        if (selectedItemValid) {
+            navigate(`/detalle/${selectedItemId}`);
+        }
+    }, [selectedItemValid, selectedItemId]);
 
     const handleChange = (event, newValue) => {
         if (newValue) {
             setSelectedItemId(newValue.id);
             setSelectedEmpleado(newValue);
-        } else {
+            setSelectedItemValid(true);
+        } 
+        else {
             setSelectedItemId(null);
             setSelectedEmpleado(null);
+            setSelectedItemValid(false)
         }
     };
+
     return (
-        <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
-            {selectedEmpleado ? (
-                <Button onClick={goDetalles}>
-                    <h2>{selectedEmpleado.nombre}</h2>
-                    <p>{selectedEmpleado.categoria}</p>
-                    {/* <img src={selectedEmpleado.img} alt={selectedEmpleado.categoria} /> */}
-                </Button>
-            ) : (
+      <>
+       
+       <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+          
                 <Autocomplete
                     open={searchOpen}
                     onOpen={() => setSearchOpen(true)}
@@ -77,14 +81,16 @@ const goDetalles= ()=>{
                             key={option.id}
                             onClick={() => {
                                 setSelectedItemId(option.id);
-                                setSelectedEmpleado(option);
+                                setSelectedItemValid(true);
                                 setSearchOpen(false);
+                             
                             }}
                         >
                             {option.categoria}
                             <img className='mini' src={option.imagen} alt='x' />
                         </li>
                     )}
+
                     renderInput={(params) => (
                         <TextField
                             {...params}
@@ -116,9 +122,11 @@ const goDetalles= ()=>{
                     )}
                     onChange={handleChange}
                 />
-            )}
+            
         </Box>
-    );
+      
+        </>
+ );
 }
 
 export default SearchBar;
