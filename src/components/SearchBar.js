@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import TextField from '@mui/material/TextField';
-import { Box} from '@mui/material';
+import { Box, Typography} from '@mui/material';
 import Autocomplete from '@mui/material/Autocomplete';
 import { useNavigate} from 'react-router-dom';
 import { getFirestore, collection, getDocs, query,  orderBy,where} from 'firebase/firestore';
@@ -86,8 +86,9 @@ function SearchBar() {
                              
                             }}
                         >
-                            {option.categoria}
+                            <Typography fontSize='0.8rem' fontWeight='bold' sx={{mr:1}}>{option.categoria}</Typography>
                             <img className='mini' src={option.imagen} alt='x' />
+                            <Typography fontSize='0.7rem' sx={{ml:1}}>{option.nombre} </Typography>  
                         </li>
                     )}
 

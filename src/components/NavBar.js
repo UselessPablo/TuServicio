@@ -102,12 +102,12 @@ const info = () =>{
                     <Button onClick={goHome} size='small' color='grey' sx={{ fontSize: '0.8rem', fontWeight: 'bold' }} ><HomeRoundedIcon sx={{ color: 'teal', mr: 2, backgroundColor: currentPage === '/' ? '#E8F5E9' : 'transparent' }} />Inicio</Button> 
                            
                 </List>
-                    <List sx={{ mt: 6, display: 'flex', flexDirection: 'column', justifyContent: 'start', alignItems: 'center' }}>  
-                    <Button onClick={goPlomeria} size='small' color='grey' sx={{ fontSize: '0.7rem', mr: 8}}>  <WaterDropRoundedIcon sx={{ color: 'blue', mr: 2 }} />Plomería</Button> 
-                    <Button onClick={goGasista} size='small' color='grey' sx={{ fontSize: '0.7rem', mr: 12, mt: 1 }}>  <PropaneTankRoundedIcon sx={{ color: 'cyan', mr: 2 }} /> Gas </Button> 
-                    <Button onClick={goConstruccion} size='small' color='grey' sx={{ fontSize: '0.7rem', mr: 3, mt: 1 }}> <ConstructionRoundedIcon sx={{ color: 'green', mr: 2 }} />Construcción  </Button>
-                    <Button size='small' color='grey' sx={{ fontSize: '0.7rem', mr: 8, mt: 1, mb: 2 }}>  <FormatPaintRoundedIcon sx={{ color: 'black', mr: 2 }} /> Pintura   </Button>    
-                    <Button onClick={goReparaciones} size='small' color='grey' sx={{ fontSize: '0.7rem', mr: 2, mt: 1 }}><BuildRoundedIcon sx={{ color: 'orangeRed', mr: 2 }} />  Todos   </Button> 
+                    <List sx={{ mt: 6, display: 'flex', flexDirection: 'column', justifyContent: 'start', alignItems: 'center'}}>  
+                    <Button onClick={goPlomeria} size='small' color='grey' sx={{ fontSize: '0.7rem', mr: 8, fontWeight: 'bold' }}>  <WaterDropRoundedIcon sx={{ color: 'blue', mr: 2 }} />Plomería</Button> 
+                    <Button onClick={goGasista} size='small' color='grey' sx={{ fontSize: '0.7rem', mr: 12, mt: 1, fontWeight: 'bold' }}>  <PropaneTankRoundedIcon sx={{ color: 'cyan', mr: 2 }} /> Gas </Button> 
+                    <Button onClick={goConstruccion} size='small' color='grey' sx={{ fontSize: '0.7rem', mr: 3, mt: 1, fontWeight: 'bold' }}> <ConstructionRoundedIcon sx={{ color: 'green', mr: 2 }} />Construcción  </Button>
+                    <Button size='small' color='grey' sx={{ fontSize: '0.7rem', mr: 8, mt: 1, mb: 2, fontWeight: 'bold' }}>  <FormatPaintRoundedIcon sx={{ color: 'black', mr: 2 }} /> Pintura   </Button>    
+                    <Button onClick={goReparaciones} size='small' color='grey' sx={{ fontSize: '0.7rem', mr: 2, mt: 1, fontWeight: 'bold' }}><BuildRoundedIcon sx={{ color: 'orangeRed', mr: 2 }} />  Todos   </Button> 
                        
                     </List> 
                 
