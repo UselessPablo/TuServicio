@@ -74,7 +74,7 @@ const info = () =>{
         
             
        <Box sx={{ flexGrow: 1, padding: 1,width:'98%'}}>
-            <AppBar position="sticky" elevation='0' sx={{ backgroundColor: 'transparent', border:'none'}}>
+            <AppBar position="sticky" elevation='0' sx={{ backgroundColor: 'secondary.main', borderTopLeftRadius:3, borderBottomLeftRadius:40, borderTopRightRadius:3, borderBottomRightRadius:40}}>
                 <Toolbar>
                     <IconButton
                         size="medium"
@@ -87,7 +87,7 @@ const info = () =>{
                         <MenuIcon />
                     </IconButton>
                   
-                    <Typography variant="h6" component="div" textAlign='center' fontWeight='bold' sx={{ flexGrow: 1 }}>
+                    <Typography variant="h1" fontSize='1.6rem'  component="div" textAlign='center' fontWeight='bold' sx={{ flexGrow: 1 }}>
                         TuServicio 
                     </Typography>
                    
@@ -125,7 +125,7 @@ const info = () =>{
                     ))}
                 </List>
             </Drawer>
-           <Box sx={{display:'flex', justifyContent:'center', flexDirection:'column', alignContent:'center'}}>
+           <Box sx={{display:'flex', justifyContent:'center', flexDirection:'column', alignContent:'center',mt:2}}>
                 <SearchBar />
            <h2>
                En esta página podrás encontrar el servicio que necesitas, ya sea reparaciones simples, como construcción de vivienda

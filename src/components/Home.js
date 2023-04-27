@@ -25,7 +25,7 @@ const goToAgua =()=>{
   return (
     <> 
    
-      <Grid container spacing={1} sx={{pr:1,pl:1}}>
+      <Grid container spacing={3} sx={{pr:3,pl:3,mt:4}}>
       <Grid item xs={6}  >
           <Box sx={{ backgroundColor: 'blue', height: 200, mt: 1, display: "flex", justifyContent: "center", alignItems: 'center' }}> 
           <Button onClick={goToAgua}>
@@ -61,7 +61,7 @@ const goToAgua =()=>{
           <Box sx={{ backgroundColor: 'yellow', height: 200, mb: 1, display: "flex", justifyContent: "center", alignItems: 'center' }}>  <BuildRoundedIcon sx={{ width: "70%", height: "80%", color: 'white' }} /> </Box>
         </Grid>
         <Grid item xs={12}>
-          <Box sx={{ backgroundColor: 'orange', height: 120, mb: 2, display: "flex", justifyContent: "center", alignItems: 'center' }}>  <FormatPaintRoundedIcon sx={{ width: "80%", height: "70%", color: 'white' }} /> </Box>
+          <Box sx={{ backgroundColor: 'orange', height: 120, mb: 4, display: "flex", justifyContent: "center", alignItems: 'center' }}>  <FormatPaintRoundedIcon sx={{ width: "80%", height: "70%", color: 'white' }} /> </Box>
         </Grid>
   
     </Grid>
