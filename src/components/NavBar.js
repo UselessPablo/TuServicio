@@ -74,7 +74,7 @@ const info = () =>{
         
             
        <Box sx={{ flexGrow: 1, padding: 1,width:'98%'}}>
-            <AppBar position="sticky" elevation='0' sx={{ backgroundColor: 'secondary.main', borderTopLeftRadius:3, borderBottomLeftRadius:40, borderTopRightRadius:3, borderBottomRightRadius:40}}>
+            <AppBar position="sticky" elevation='0' sx={{ backgroundColor: 'secondary.main', borderTopLeftRadius:3, borderBottomLeftRadius:40, borderTopRightRadius:3, borderBottomRightRadius:40,pb:1}}>
                 <Toolbar>
                     <IconButton
                         size="medium"
