@@ -10,40 +10,36 @@ import ShareIcon from '@mui/icons-material/Share';
 
 
 const ItemDetail = ({ data }) => {
-   
-
-
 
     return (
-       <Grid container sparcing={1} sx={{mt:4,ml:2}}>
-            <Grid xs={4} sx={{display:'flex', justifyContent:'center', alignContent:'center'}}>
-       <Box>
-                    <Card sx={{ maxWidth: 255, backgroundColor: 'primary.main' }}>
-                <CardMedia
-                    sx={{ height: 170 }}
-                    image={data.imagen}
-                    title={data.categoria}
-                />
-                <CardContent sx={{}}>
-                    <Typography gutterBottom variant="h5" component="div">
-                       {data.nombre}
-                    </Typography>
-    
-                </CardContent>
-                <CardActions>
-                    <Button size="small" variant='contained'><ShareIcon/></Button>
+        <Grid container sparcing={1} sx={{ mt: 4, ml: 2 }}>
+            <Grid xs={4} sx={{ display: 'flex', justifyContent: 'center', alignContent: 'center' }}>
+                <Box>
+                    <Card sx={{ maxWidth: 185, backgroundColor: 'primary.main', ml: 2 }}>
+                        <CardMedia
+                            sx={{ height: 160 }}
+                            image={data.imagen}
+                            title={data.categoria}
+                        />
+                        <CardContent sx={{}}>
+                            <Typography gutterBottom variant="h5" component="div">
+                                {data.nombre}
+                            </Typography>
+
+                        </CardContent>
+                        <CardActions>
+                            <Button size="small" variant='contained'><ShareIcon /></Button>
                             <Button size="small" variant='contained'>contactar</Button>
-                </CardActions>
-            </Card>
-                 
-        </Box>
-       </Grid>
-            <Grid  xs={8} >
-             <Box  sx={{display:'flex', justifyContent:'center',flexDirection:'column', alignContent:'center', width:'98%'}}>
-                <Typography variant='h6' textAlign='center'  sx={{width:'100%'}}>  Detalles y habilidades</Typography>
-                <Typography sx={{ pt:4,mt:5, textAlign:'start',width:'50%',ml:5}}>
-                    {data.destrezas}
-                </Typography>
+                        </CardActions>
+                    </Card>
+                </Box>
+            </Grid>
+            <Grid xs={8} >
+                <Box sx={{ display: 'flex', justifyContent: 'center', flexDirection: 'column', alignContent: 'center', width: '90%' }}>
+                    <Typography variant='h6' textAlign='center' sx={{ width: '100%' }}>  Detalles y habilidades</Typography>
+                    <Typography sx={{ pt: 4, mt: 5, textAlign: 'start', width: '50%', ml: 5 }}>
+                        {data.destrezas}
+                    </Typography>
                 </Box>
             </Grid>
         </Grid>

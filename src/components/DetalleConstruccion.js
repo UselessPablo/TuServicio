@@ -1,12 +1,13 @@
-import React from 'react'
-import {useState, useEffect} from 'react';
-import {collection, getDocs, query, where} from 'firebase/firestore';
-import {db} from '../utils/Firebase';
+import React from 'react';
+import { useState, useEffect } from 'react';
+import { collection, getDocs, query, where } from 'firebase/firestore';
+import { db } from '../utils/Firebase';
 import Construccion from './Construccion';
+import { CircularProgress, Box } from '@mui/material';
 
 const DetalleConstruccion = () => {
-
     const [data, setData] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const q = query(collection(db, 'empleados'), where('categoria', '==', 'constructor'));
@@ -16,16 +17,26 @@ const DetalleConstruccion = () => {
                     id: doc.id,
                     ...doc.data(),
                 }));
+                setLoading(false);
                 setData(data);
             })
             .catch((error) => {
                 console.log(error);
             });
     }, []);
-   
-            return (
-       <Construccion data={data} />
-    )
-}
 
-export default DetalleConstruccion
+    return (
+        <>
+            {loading ? (
+                <Box display="flex" justifyContent="center" alignItems="center" height="90vh">
+                    <CircularProgress color='secondary' size='130px' />
+                    
+                </Box>
+            ) : (
+                <Construccion data={data} />
+            )}
+        </>
+    );
+};
+
+export default DetalleConstruccion;

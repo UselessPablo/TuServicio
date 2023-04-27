@@ -13,7 +13,7 @@ const Router = () => (
     <HashRouter basename="/">
         <Routes>
          <Route path="/" element={<Layout />}>
-         <Route path="/Home" element={<Home/>} />
+         <Route path="/" element={<Home/>} />
          <Route path='/DetalleAgua/' element={<DetallePlomeria/>} />
          <Route path='/Gasistas/' element={<Gas/>}/>
          <Route path='/Reparaciones' element={<DetalleReparaciones/>} />

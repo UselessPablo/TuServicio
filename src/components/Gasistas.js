@@ -1,6 +1,8 @@
 import React from "react";
-import {Box, Typography, Card,CardHeader, CardActions, 
-    CardMedia,CardContent,Collapse,IconButton, IconButtonProps, styled,Avatar} from '@mui/material'
+import {
+    Box, Typography, Card, CardHeader, CardActions,
+    CardMedia, CardContent, Collapse, IconButton, IconButtonProps, styled, Avatar
+} from '@mui/material'
 import { useState, useEffect } from "react";
 import { random } from 'lodash';
 import FavoriteIcon from '@mui/icons-material/Favorite';
@@ -19,7 +21,6 @@ const Gasistas = ({ data }) => {
     useEffect(() => {
         setDatos(data);
     }, [data])
-
 
 
     interface ExpandMoreProps extends IconButtonProps {
@@ -49,15 +50,15 @@ const Gasistas = ({ data }) => {
         }));
     };
 
-console.log(data);
+    console.log(data);
     return (
 
         <>
             <Typography textAlign='center' variant='h6' sx={{ padding: 1, borderRadius: 2, width: '180px', margin: '0 auto', mt: 2 }}>Gasistas</Typography>
             <Box sx={{ display: 'flex', flexWrap: 'wrap', m: 1, justifyContent: 'center' }}>
-             
+
                 {datos.map((dato) => (
-                    <Box key={dato.id} sx={{ width: '100%', maxWidth: 180, m: 1}}>
+                    <Box key={dato.id} sx={{ width: '100%', maxWidth: 180, m: 1 }}>
                         <Card>
                             <CardHeader
                                 avatar={
@@ -72,9 +73,7 @@ console.log(data);
                                 }
                                 title={dato.nombre}
                             />
-
                             <CardMedia component="img" height="194" image={dato.imagen} alt={dato.nombre} />
-
                             <CardContent sx={{ overflow: 'auto', maxHeight: '250px' }}>
                                 <Typography variant="body2" color="black" fontWeight='bold' textAlign='center' sx={{ mb: 1, mt: 1 }}>
                                     {dato.categoria}
@@ -99,7 +98,6 @@ console.log(data);
                                 <IconButton aria-label="share">
                                     <ShareIcon />
                                 </IconButton>
-
                                 <ExpandMore
                                     expand={expanded[dato.id] || false}
                                     onClick={() => handleExpandClick(dato.id)}
@@ -113,7 +111,6 @@ console.log(data);
                     </Box>
                 ))}
             </Box>
-
         </>
     );
 };

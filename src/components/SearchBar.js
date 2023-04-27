@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import TextField from '@mui/material/TextField';
-import { Box, Typography} from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import Autocomplete from '@mui/material/Autocomplete';
-import { useNavigate} from 'react-router-dom';
-import { getFirestore, collection, getDocs, query,  orderBy,where} from 'firebase/firestore';
+import { useNavigate } from 'react-router-dom';
+import { getFirestore, collection, getDocs, query, orderBy, where } from 'firebase/firestore';
 import SearchIcon from '@mui/icons-material/Search';
 import InputAdornment from '@mui/material/InputAdornment';
 
@@ -16,7 +16,7 @@ function SearchBar() {
     const [searchOpen, setSearchOpen] = useState(true);
     const [selectedEmpleado, setSelectedEmpleado] = useState();
     const [selectedItemValid, setSelectedItemValid] = useState(false);
-    
+
     useEffect(() => {
         const querydb = getFirestore();
         const queryCollection = collection(querydb, 'empleados');
@@ -41,7 +41,7 @@ function SearchBar() {
             setOptions([]);
         }
     }, [searchTerm]);
-    
+
     console.log(selectedItemId);
     useEffect(() => {
         if (selectedItemValid) {
@@ -54,7 +54,7 @@ function SearchBar() {
             setSelectedItemId(newValue.id);
             setSelectedEmpleado(newValue);
             setSelectedItemValid(true);
-        } 
+        }
         else {
             setSelectedItemId(null);
             setSelectedEmpleado(null);
@@ -63,10 +63,9 @@ function SearchBar() {
     };
 
     return (
-      <>
-       
-       <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
-          
+        <>
+
+            <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
                 <Autocomplete
                     open={searchOpen}
                     onOpen={() => setSearchOpen(true)}
@@ -83,20 +82,18 @@ function SearchBar() {
                                 setSelectedItemId(option.id);
                                 setSelectedItemValid(true);
                                 setSearchOpen(false);
-                             
                             }}
                         >
-                            <Typography fontSize='0.8rem' fontWeight='bold' sx={{mr:1}}>{option.categoria}</Typography>
+                            <Typography fontSize='0.8rem' fontWeight='bold' sx={{ mr: 1 }}>{option.categoria}</Typography>
                             <img className='mini' src={option.imagen} alt='x' />
-                            <Typography fontSize='0.7rem' sx={{ml:1}}>{option.nombre} </Typography>  
+                            <Typography fontSize='0.7rem' sx={{ ml: 1 }}>{option.nombre} </Typography>
                         </li>
                     )}
-
                     renderInput={(params) => (
                         <TextField
                             {...params}
                             label='Buscar...'
-                            sx={{ width: 220, mb: 2,mt:2, display:'flex', justifyContent:'center' }}
+                            sx={{ width: 220, mb: 2, mt: 2, display: 'flex', justifyContent: 'center' }}
                             color='info'
                             value={searchTerm}
                             variant='standard'
@@ -123,11 +120,10 @@ function SearchBar() {
                     )}
                     onChange={handleChange}
                 />
-            
-        </Box>
-      
+            </Box>
+
         </>
- );
+    );
 }
 
 export default SearchBar;
