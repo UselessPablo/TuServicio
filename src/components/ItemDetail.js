@@ -15,7 +15,7 @@ const ItemDetail = ({ data }) => {
 
 
     return (
-       <Grid container sparcing={2} sx={{mt:4,ml:2}}>
+       <Grid container sparcing={1} sx={{mt:4,ml:2}}>
             <Grid xs={4} sx={{display:'flex', justifyContent:'center', alignContent:'center'}}>
        <Box>
                     <Card sx={{ maxWidth: 255, backgroundColor: 'primary.main' }}>
@@ -38,10 +38,10 @@ const ItemDetail = ({ data }) => {
                  
         </Box>
        </Grid>
-            <Grid  xs={6} >
-             <Box  sx={{display:'flex', justifyContent:'center',flexDirection:'column', alignContent:'center', width:'100%'}}>
+            <Grid  xs={8} >
+             <Box  sx={{display:'flex', justifyContent:'center',flexDirection:'column', alignContent:'center', width:'98%'}}>
                 <Typography variant='h6' textAlign='center'  sx={{width:'100%'}}>  Detalles y habilidades</Typography>
-                <Typography sx={{ pt:4,mt:5,ml:3, textAlign:'start'}}>
+                <Typography sx={{ pt:4,mt:5, textAlign:'start',width:'50%',ml:5}}>
                     {data.destrezas}
                 </Typography>
                 </Box>
