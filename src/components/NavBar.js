@@ -61,7 +61,9 @@ const NavBar = () => {
         toggleDrawer('left', false);
         setCurrentPage('/Construccion');
     }
-
+    const register = () =>{
+        navigate('/Register')
+    }
     const info = () => {
         navigate('/Info')
     }
@@ -85,7 +87,7 @@ const NavBar = () => {
                         TuServicio
                     </Typography>
                     <Button onClick={info} color='error' variant='contained' size='small' sx={{ mr: 1 }}>info</Button>
-                    <Button color="success" variant='contained' size='small'>Login</Button>
+                    <Button  onClick={register} color="success" variant='contained' size='small'>Login</Button>
                 </Toolbar>
             </AppBar>
             <Drawer anchor="left" open={state.left} onClose={() => toggleDrawer('left', false)}>
