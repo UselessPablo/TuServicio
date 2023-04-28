@@ -1,7 +1,7 @@
 import React from 'react'
 import {useState, useEffect} from 'react';
 import {getDocs, collection, query, where} from 'firebase/firestore';
-import {db} from '../utils/Firebase';
+import  app from '../utils/Firebase';
 import Reparaciones from './Reparaciones'
 
 const DetalleReparaciones = () => {
@@ -9,7 +9,7 @@ const DetalleReparaciones = () => {
       const [data, setData] = useState([]);
    
     useEffect(() => {
-        const coleccionDeEmpleados = collection(db, 'empleados');
+        const coleccionDeEmpleados = collection(app, 'empleados');
         getDocs(coleccionDeEmpleados)
             .then((querySnapshot) => {
                 const data = querySnapshot.docs.map((doc) => ({

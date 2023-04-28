@@ -7,7 +7,8 @@ import Gas from '../components/Gas';
 import DetalleReparaciones from '../components/DetalleReparaciones';
 import DetalleConstruccion from '../components/DetalleConstruccion';
 import DetalleCard from '../components/DetalleCard';
-import Register from '../components/Register'
+import Login from '../components/Login'
+import Register from '../components/Register';
 
 const Router = () => (
 
@@ -20,7 +21,8 @@ const Router = () => (
          <Route path='/Reparaciones' element={<DetalleReparaciones/>} />
          <Route path='/Construccion' element={<DetalleConstruccion/>}/>
          <Route path='/detalle/:id' element={<DetalleCard/>}/>
-         <Route path='/Register' element={<Register/>}/>
+         <Route path='/Login' element={<Login/>}/>
+                <Route path='/Register' element={<Register />} />
          <Route path='/Info' element={<Info/>}/>
             </Route>
         </Routes>

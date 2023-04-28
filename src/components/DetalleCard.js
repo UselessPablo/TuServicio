@@ -8,8 +8,8 @@ const DetalleCard = () => {
     const { id } = useParams();
     const [data, setData] = useState([]);
     useEffect(() => {
-        const db = getFirestore();
-        const queryDoc = doc(db, 'empleados', id)
+        const app = getFirestore();
+        const queryDoc = doc(app, 'empleados', id)
         getDoc(queryDoc)
             .then(res => setData({ id: res.id, ...res.data() }))
     }, [id])

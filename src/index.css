@@ -28,3 +28,11 @@ h2{
 .disable{
   display: none;
 }
+a{
+  color: green;
+  text-decoration: none;
+  border: 1px solid;
+  padding: 5px;
+  border-radius: 4px;
+  
+}
