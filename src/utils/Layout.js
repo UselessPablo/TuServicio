@@ -2,12 +2,12 @@ import { Outlet } from "react-router-dom";
 import NavBar from "../components/NavBar";
 
 
-const Layout = () => {
+const Layout = ({avatar}) => {
     
     return (
         <>
           
-           <NavBar/>
+           <NavBar avatar={avatar}/>
             <Outlet />
            
         </>

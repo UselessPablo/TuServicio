@@ -7,14 +7,17 @@ import {  storage} from '../utils/Firebase';
 import { getDownloadURL,uploadBytes, ref as sRef } from '@firebase/storage';
 import { updateProfile } from 'firebase/auth';
 import NavBar from '../components/NavBar'
-import { UseUserContext } from '../components/UserContext';
+
+
+
+
 
 const auth = getAuth(app);
 
-const Login = ({ name }) => {
+const Login = ({ name,setAvatarnav }) => {
    
     
-   const setUserAvatar = useContext(UseUserContext);
+   
     const navigate = useNavigate();
     const [error, setError] = useState('');
     const [email, setMail] = useState('');
@@ -33,6 +36,12 @@ const Login = ({ name }) => {
         });
         return unsubscribe;
     }, []);
+
+    useEffect(()=>{
+        setAvatarnav(avatar)
+    },[avatar])
+
+
     const handleLogin = (e) => {
         e.preventDefault();
         let email = formRef.current.email.value;
@@ -66,7 +75,7 @@ const Login = ({ name }) => {
         setMail(mail);
     };
 
-console.log(setUserAvatar);
+// console.log(setUserAvatar);
     const handlerForgetPassword = () => {
         sendPasswordResetEmail(auth, email)
             .then(() => {
@@ -77,6 +86,7 @@ console.log(setUserAvatar);
                 setError(error.message);
             });
     };
+    // const setUserAvatar = useContext(UseUserContext);
     const handleUpload = () => {
         const storageRef = sRef(storage, 'usuario');
         uploadBytes(storageRef, file)
@@ -92,7 +102,8 @@ console.log(setUserAvatar);
                             })
                                 .then(() => {
                                     console.log('Profile updated successfully!');
-                                    setAvatar(url);                      
+                                    setAvatar(url);   
+                                    // setUserAvatar(url);                   
                                 })
                              
                                 .catch((error) => {
@@ -118,6 +129,7 @@ console.log(setUserAvatar);
                         {user && avatar && (
                             <Avatar src={avatar} />
                         )}
+                       
                         <form ref={formRef} >
                             <h3 >Ingresa tu usuario y contraseña {name}</h3>
                             <Box >
@@ -136,6 +148,7 @@ console.log(setUserAvatar);
                             <p><small>No tienes cuenta? Crea una... <Link to={'/Register'}>REGISTRARSE</Link></small></p>
                             <p><small>Olvidaste tu contraseña </small><Button sx={{ ml: 1 }} variant='outlined' color='warning' size='small' onClick={handlerForgetPassword}>Restablecer</Button></p>
                         </form>
+                      
                         {loggedIn && (
                             <Box sx={{ mb: 4 }}>
                                 <input type="file" onChange={handleFileChange} />
