@@ -1,12 +1,12 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import { getDocs, collection, query, where } from 'firebase/firestore';
-import  app  from '../utils/Firebase';
+import {getDocs, collection, query, where, getFirestore} from 'firebase/firestore';
 import Gasistas from './Gasistas';
+
 
 const Gas = () => {
     const [data, setData] = useState([]);
-   
+   const app = getFirestore();
     useEffect(() => {
         const q = query(collection(app, 'empleados'), where('categoria', '==', 'gasista'));
         getDocs(q)

@@ -4,11 +4,13 @@ import { collection, getDocs, query, where} from 'firebase/firestore';
 import app from '../utils/Firebase'
 import Plomeria from '../components/Plomeria';
 import { Box, Skeleton } from '@mui/material';
+import { getFirestore } from 'firebase/firestore'
+
 
 const DetallePlomeria = () => {
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
-
+    const app = getFirestore();
     useEffect(() => {
         const q = query(collection(app, 'empleados'), where('categoria', '==', 'plomero'));
         getDocs(q)

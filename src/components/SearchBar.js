@@ -42,7 +42,7 @@ function SearchBar() {
         }
     }, [searchTerm]);
 
-    console.log(selectedItemId);
+
     useEffect(() => {
         if (selectedItemValid) {
             navigate(`/detalle/${selectedItemId}`);

@@ -7,7 +7,6 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
-import { useState} from 'react';
 import Drawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
@@ -25,41 +24,43 @@ import FormatPaintRoundedIcon from '@mui/icons-material/FormatPaintRounded';
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 import { useNavigate } from 'react-router-dom';
 import SearchBar from './SearchBar';
+import { Avatar } from '@mui/material';
+import { useState } from 'react';
+import { UserContext } from '../components/UserContext'
+import { UseUserContext } from '../components/UserContext';
 
 
-const NavBar = () => {
+
+
+const NavBar = ({avatar}) => {
+    // const  avatar  = UseUserContext(UserContext);
     const [state, setState] = useState({ left: false });
     const navigate = useNavigate();
-    const [currentPage, setCurrentPage] = useState("");
-
+   
     const toggleDrawer = (anchor, open) => {
         setState({ ...state, [anchor]: open });
     };
-
+console.log({avatar});
     const goHome = () => {
         navigate('/');
-        toggleDrawer('left', false);
-        setCurrentPage('/');
+        toggleDrawer('left', false);  
     }
     const goPlomeria = () => {
         navigate('/DetalleAgua')
-        toggleDrawer('left', false);
-        setCurrentPage('/DetalleAgua');
+        toggleDrawer('left', false); 
     }
     const goGasista = () => {
         navigate('/Gasistas')
         toggleDrawer('left', false);
-        setCurrentPage('/Gasistas');
+   
     }
     const goReparaciones = () => {
         navigate('/Reparaciones')
-        toggleDrawer('left', false);
-        setCurrentPage('/Reparaciones');
+        toggleDrawer('left', false); 
     }
     const goConstruccion = () => {
         navigate('/Construccion')
         toggleDrawer('left', false);
-        setCurrentPage('/Construccion');
     }
     const register = () =>{
         navigate('/Login')
@@ -67,10 +68,11 @@ const NavBar = () => {
     const info = () => {
         navigate('/Info')
     }
-
+    
     return (
-
+        
         <Box sx={{ flexGrow: 1, padding: 1, width: '98%' }}>
+          <Avatar src={avatar}/>
             <AppBar position="sticky" elevation='0' sx={{ backgroundColor:'transparent', pb: 2 }}>
                 <Toolbar>
                     <IconButton
@@ -92,7 +94,7 @@ const NavBar = () => {
             </AppBar>
             <Drawer anchor="left" open={state.left} onClose={() => toggleDrawer('left', false)}>
                 <List sx={{ mt: 2, display: 'flex', flexDirection: 'column', justifyContent: 'start', alignItems: 'center' }}>
-                    <Button onClick={goHome} size='small' color='grey' sx={{ fontSize: '0.8rem', fontWeight: 'bold' }} ><HomeRoundedIcon sx={{ color: 'teal', mr: 2, backgroundColor: currentPage === '/' ? '#E8F5E9' : 'transparent' }} />Inicio</Button>
+                    <Button onClick={goHome} size='small' color='grey' sx={{ fontSize: '0.8rem', fontWeight: 'bold' }} ><HomeRoundedIcon sx={{ color: 'teal', mr: 2}} />Inicio</Button>
                 </List>
                 <List sx={{ mt: 6, display: 'flex', flexDirection: 'column', justifyContent: 'start', alignItems: 'center' }}>
                     <Button onClick={goPlomeria} size='small' color='grey' sx={{ fontSize: '0.7rem', mr: 8, fontWeight: 'bold' }}>  <WaterDropRoundedIcon sx={{ color: 'blue', mr: 2 }} />Plomería</Button>
@@ -115,6 +117,7 @@ const NavBar = () => {
                     ))}
                 </List>
             </Drawer>
+         
             <Box sx={{ display: 'flex', justifyContent: 'center', flexDirection: 'column', alignContent: 'center', mt: 2 }}>
                 <SearchBar />
                 <h2>
@@ -122,7 +125,9 @@ const NavBar = () => {
                 </h2>
             </Box>
         </Box>
-    );
+        
+);
+   
 };
 
 export default NavBar;

@@ -1,11 +1,12 @@
 import React from 'react'
 import {useState, useEffect} from 'react';
 import {getDocs, collection, query, where} from 'firebase/firestore';
-import  app from '../utils/Firebase';
+import app from '../utils/Firebase';
 import Reparaciones from './Reparaciones'
+import { getFirestore } from 'firebase/firestore'
 
 const DetalleReparaciones = () => {
-  
+    const app = getFirestore();
       const [data, setData] = useState([]);
    
     useEffect(() => {
