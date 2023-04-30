@@ -14,11 +14,10 @@ import NavBar from '../components/NavBar'
 
 const auth = getAuth(app);
 
-const Login = ({ name,setAvatarnav }) => {
+const Login = ({ setUsersmail, setAvatarnav }) => {
    
     
-   
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
     const [error, setError] = useState('');
     const [email, setMail] = useState('');
     const [file, setFile] = useState(null);
@@ -26,7 +25,7 @@ const Login = ({ name,setAvatarnav }) => {
     const formRef = useRef(null);
     const [avatar, setAvatar] = useState(null);
     const [user, setUser]= useState(null);
-
+   
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
             setUser(user);
@@ -41,6 +40,9 @@ const Login = ({ name,setAvatarnav }) => {
         setAvatarnav(avatar)
     },[avatar])
 
+    useEffect(()=>{
+    setUsersmail(email)
+},[email])
 
     const handleLogin = (e) => {
         e.preventDefault();
@@ -67,7 +69,6 @@ const Login = ({ name,setAvatarnav }) => {
 
     const handleFileChange = (event) => {
         setFile(event.target.files[0]);
-        console.log(file);
     };
 
     const emailHandler = (e) => {
@@ -131,7 +132,7 @@ const Login = ({ name,setAvatarnav }) => {
                         )}
                        
                         <form ref={formRef} >
-                            <h3 >Ingresa tu usuario y contraseña {name}</h3>
+                            <h3 >Ingresa tu usuario y contraseña </h3>
                             <Box >
                                 <Input
                                     type="email"

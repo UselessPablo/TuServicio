@@ -14,21 +14,21 @@ import { useState } from 'react';
 const Router = () => {
 
 const [avatar, setAvatar] = useState(null);
-
+const [users2, setUsers2] = useState(null)
 
  return(
 
 
     <HashRouter basename="/">
         <Routes>
-         <Route path="/" element={<Layout avatar={avatar}/>}>
+         <Route path="/" element={<Layout avatar={avatar} user={users2} />}>
          <Route path="/" element={<Home/>} />
          <Route path='/DetalleAgua/' element={<DetallePlomeria/>} />
          <Route path='/Gasistas/' element={<Gas/>}/>
          <Route path='/Reparaciones' element={<DetalleReparaciones/>} />
          <Route path='/Construccion' element={<DetalleConstruccion/>}/>
          <Route path='/detalle/:id' element={<DetalleCard/>}/>
-         <Route path='/Login' element={<Login setAvatarnav={setAvatar}/>}/>
+         <Route path='/Login' element={<Login setAvatarnav={setAvatar} setUsersmail={setUsers2}/>}/>
                 <Route path='/Register' element={<Register />} />
          <Route path='/Info' element={<Info/>}/>
             </Route>

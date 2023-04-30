@@ -26,14 +26,14 @@ import { useNavigate } from 'react-router-dom';
 import SearchBar from './SearchBar';
 import { Avatar } from '@mui/material';
 import { useState } from 'react';
+import { Dialog, DialogTitle, DialogContent, DialogActions } from '@mui/material';
 
 
-
-const NavBar = ({avatar}) => {
-   
+const NavBar = ({avatar, user}) => {
+    const [open, setOpen]= useState(false);
     const [state, setState] = useState({ left: false });
     const navigate = useNavigate();
-   
+   console.log(user);
     const toggleDrawer = (anchor, open) => {
         setState({ ...state, [anchor]: open });
     };
@@ -65,7 +65,14 @@ const NavBar = ({avatar}) => {
     const info = () => {
         navigate('/Info')
     }
-    
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+
     return (
        
         <Box sx={{ flexGrow: 1, padding: 1, width: '98%' }}>
@@ -77,22 +84,41 @@ const NavBar = ({avatar}) => {
                         edge="left"
                         color="inherit"
                         aria-label="menu"
-                        sx={{ mr: 2 }}
+                        sx={{  }}
                         onClick={() => toggleDrawer('left', true)}
                     >
                         <MenuIcon />
                     </IconButton>
-                    <Typography variant="h1" fontSize='1.6rem' component="div" textAlign='center' fontWeight='bold' sx={{ flexGrow: 1 }}>
+                    <Typography variant="h1" fontSize='1.4rem' component="div"  fontWeight='bold' sx={{ flexGrow: 1, ml:2 }}>
                         TuServicio
                     </Typography>
-                        <Avatar src={avatar} sx={{mr:3}} />
-                    <Button onClick={info} color='error' variant='contained' size='small' sx={{ mr: 1 }}>info</Button>
-                    <Button  onClick={register} color="success" variant='contained' size='small'>Login</Button>
-                      
+                   <Box sx={{ml:4, display:'flex', flexDirection:'column-reverse', justifyContent:'center'}}>
+                    <Button  onClick={register} color="success" variant='contained' size='small'sx={{ maxHeight:27, padding:1,mt:1, width:'50%' }}>Login</Button>
+                        <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignContent: 'center'}}>
+                            <Button onClick={handleClickOpen} >
+                            <Avatar src={avatar} sx={{}} alt={user} />
+                            </Button>
+                        </Box>
+                       
+                        <Dialog open={open}  onClose={handleClose} sx={{display:'flex', justifyContent:'center', alignItems:'center', minWidth:'400px', textAlign:'center'}}>
+                            <Avatar src={avatar} sx={{ml:2,mt:2}}/>
+                            <DialogTitle>{user}</DialogTitle>
+                            
+                            <DialogContent>
+                             
+                                No tienes Favoritos
+                            </DialogContent>
+                            <DialogActions>
+                                <Button onClick={handleClose} color='info'>Cerrar</Button>
+                            </DialogActions>
+                        </Dialog>
+                        
+                    </Box>
                 </Toolbar>
             </AppBar>
             <Drawer anchor="left" open={state.left} onClose={() => toggleDrawer('left', false)}>
                 <List sx={{ mt: 2, display: 'flex', flexDirection: 'column', justifyContent: 'start', alignItems: 'center' }}>
+                  
                     <Button onClick={goHome} size='small' color='grey' sx={{ fontSize: '0.8rem', fontWeight: 'bold' }} ><HomeRoundedIcon sx={{ color: 'teal', mr: 2}} />Inicio</Button>
                         
                 </List>
@@ -109,12 +135,14 @@ const NavBar = ({avatar}) => {
                         <ListItem key={text} disablePadding>
                             <ListItemButton>
                                 <ListItemIcon>
-                                    {index % 2 === 0 ? <ContactsRoundedIcon sx={{ color: 'lightblue' }} /> : <MailIcon sx={{ color: 'lightsalmon' }} />}
+                                    {<ContactsRoundedIcon sx={{ color: 'lightblue' }} />}
                                 </ListItemIcon>
                                 <ListItemText primary={text} />
                             </ListItemButton>
+                           
                         </ListItem>
                     ))}
+                    <Button onClick={info} color='error' variant='contained' size='small' sx={{ ml: 6,mt:3, maxHeight: 22 }}>info</Button>
                 </List>
             </Drawer>
                 
