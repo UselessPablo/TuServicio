@@ -46,9 +46,9 @@ a{
     margin: 32px;
     position: relative;
     overflow-y: auto;
-    display: -webkit-box;
+    /* display: -webkit-box;
     display: -webkit-flex;
-    display: -ms-flexbox;
+    display: -ms-flexbox; */
     display: flex;
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
@@ -63,5 +63,13 @@ a{
   justify-content: center;
   width: 300px;
   margin-left: 2%;
-  
+
+}
+.css-ypiqx9-MuiDialogContent-root {
+ 
+  display: flex;
+  flex-direction: column;
+    -webkit-overflow-scrolling: touch;
+    overflow-y: hidden;
+    padding: 20px 24px;
 }

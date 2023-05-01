@@ -29,7 +29,7 @@ import { useState } from 'react';
 import { Dialog, DialogTitle, DialogContent, DialogActions } from '@mui/material';
 
 
-const NavBar = ({avatar, user}) => {
+const NavBar = ({avatar, user, nombre, apellido, telefono}) => {
     const [open, setOpen]= useState(false);
     const [state, setState] = useState({ left: false });
     const navigate = useNavigate();
@@ -102,12 +102,21 @@ const NavBar = ({avatar, user}) => {
                        
                         <Dialog open={open}  onClose={handleClose} sx={{display:'flex', justifyContent:'center', alignItems:'center', minWidth:'400px', textAlign:'center'}}>
                             <Avatar src={avatar} sx={{ml:2,mt:2}}/>
-                            <DialogTitle>{user}</DialogTitle>
+                            <DialogTitle sx={{textAlign:'start',color:'info2.main'}}>Hola, {nombre}</DialogTitle>
                             
-                            <DialogContent>
-                             
-                                No tienes Favoritos
+                            <DialogContent >
+                            <List>
+                             <ListItem sx={{display:'flex', flexDirection:'column'}}>
+                                            <Typography fontWeight='bold'sx={{mb:2}} > Datos: </Typography> 
+                                            <Typography>Usuario:{user} </Typography>   
+                                            <Typography>Nombre:  {nombre}</Typography>
+                                            <Typography>Apellido: {apellido}</Typography>
+                                            <Typography>Contacto:  {telefono}</Typography>
+                                            <Typography sx={{mt:1, color:'pop.main'}} > No tienes Favoritos</Typography>  
+                                        </ListItem>
+                                    </List>
                             </DialogContent>
+                          
                             <DialogActions>
                                 <Button onClick={handleClose} color='info'>Cerrar</Button>
                             </DialogActions>

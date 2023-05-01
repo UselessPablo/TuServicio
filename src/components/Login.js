@@ -1,6 +1,6 @@
 import { getAuth, signInWithEmailAndPassword, sendPasswordResetEmail, onAuthStateChanged } from 'firebase/auth';
 import React, { useState, useEffect, useRef } from 'react';
-import { Link} from 'react-router-dom';
+import { Link, useNavigate} from 'react-router-dom';
 import { Input, Box, Button, Avatar, TextField, Typography} from '@mui/material';
 import app from '../utils/Firebase'
 import {  storage} from '../utils/Firebase';
@@ -14,7 +14,7 @@ import NavBar from '../components/NavBar'
 
 const auth = getAuth(app);
 
-const Login = ({ setUsersmail, setAvatarnav }) => {
+const Login = ({ setUsersmail, setAvatarnav, setNombreLog, setApellidoLog, setTelefonoLog }) => {
    
     
     // const navigate = useNavigate();
@@ -25,8 +25,12 @@ const Login = ({ setUsersmail, setAvatarnav }) => {
     const formRef = useRef(null);
     const [avatar, setAvatar] = useState(null);
     const [user, setUser]= useState(null);
+   const [nombre, setNombre] = useState(null)
+   const [telefono,setTelefono] = useState(null)
+   const [apellido, setApellido] = useState(null)
+    const navigate=useNavigate();
    
-    useEffect(() => {
+   useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
             setUser(user);
             if (user) {
@@ -43,6 +47,18 @@ const Login = ({ setUsersmail, setAvatarnav }) => {
     useEffect(()=>{
     setUsersmail(email)
 },[email])
+
+    useEffect(() => {
+        setNombreLog(nombre)
+    }, [nombre])
+
+    useEffect(() => {
+        setApellidoLog(apellido)
+    }, [apellido])
+
+    useEffect(() => {
+        setTelefonoLog(telefono)
+    }, [telefono])
 
     const handleLogin = (e) => {
         e.preventDefault();
@@ -124,7 +140,44 @@ const Login = ({ setUsersmail, setAvatarnav }) => {
                 setError(error.message);
             });
     };
-          return (
+    const handleLogin2 = (e) => {
+        e.preventDefault();
+        const names = formRef.current.name.value;
+        const apellidos = formRef.current.apellido.value;
+        const telefonos = formRef.current.telefono.value;
+
+        // Actualizar los estados de name, apellido y telefono
+        setNombre(names);
+        setApellido(apellidos);
+        setTelefono(telefonos);
+
+        // Obtener el usuario actualmente autenticado
+        const user = auth.currentUser;
+
+        // Actualizar la información del perfil del usuario con los nuevos datos
+        updateProfile(user, {
+            displayName: `${names} ${apellidos}`,
+            phoneNumber: telefonos
+        })
+            .then(() => {
+                console.log('Perfil de usuario actualizado');
+
+                // Actualizar los estados de name, apellido y telefono con los valores ingresados en el formulario
+                setNombre(names);
+                setApellido(apellidos);
+                setTelefono(telefonos);
+               navigate('/')
+                // Aquí puedes hacer algo como redirigir al usuario a otra página, mostrar un mensaje de éxito, etc.
+            })
+            .catch((error) => {
+                console.error(error);
+                setError(error.message);
+            });
+    };
+
+
+
+    return (
                    
                    <Box sx={{ ml: 6, mt: 3, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignContent: 'center' }}>
                         {user && avatar && (
@@ -168,12 +221,13 @@ const Login = ({ setUsersmail, setAvatarnav }) => {
                           </Box>
                           <Typography textAlign='start'sx={{mt:4,ml:5}}>Completa el siguiente formulario</Typography> 
                             <Box sx={{display:'flex',flexDirection:'column', mt:4}}>
-                               <form className='formDetails'>
-                                <TextField placeholder='Nombre' variant='filled' />
-                                <TextField placeholder='Apellido' variant='filled' />
-                                <TextField placeholder='Dirección' variant='filled' />
-                                <TextField placeholder='Teléfono' variant='filled' />
-                             <Button variant='contained' sx={{mt:2,mb:5}}>Enviar</Button>
+                        <form className='formDetails' ref={formRef} onSubmit={handleLogin2}>
+                            <TextField placeholder='Nombre' variant='filled' name='name' type='text' onChange={(e) => {
+                                setNombre(e.target.value);
+                            }} />
+                                <TextField placeholder='Apellido' variant='filled' name='apellido' type='text' />
+                                <TextField placeholder='Teléfono' variant='filled' name='telefono' type='number'/>
+                            <Button variant='contained' sx={{ mt: 2, mb: 5 }} type="submit">Enviar</Button>
                               </form>
                             </Box>
                             

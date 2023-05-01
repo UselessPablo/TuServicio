@@ -17,11 +17,10 @@ const Register = () => {
     const [success, setSuccess] = useState('')
     const [form, setForm] = useState(true);
     //handler for submit registration form
-    const [name, setName] = useState('')
     const submitHandler = (e) => {
         e.preventDefault();
         let form = e.target;
-        let name = form.name.value
+    
 
         let email = form.email.value
         let password = form.password.value
@@ -48,7 +47,6 @@ const Register = () => {
         }
 
         setError('')
-        setName(name);
         createUserWithEmailAndPassword(auth, email, password)
             .then(result => {
                 const user = result.user;
@@ -93,9 +91,7 @@ const Register = () => {
         <Box sx={{ml:6,mt:2}}>
             <form onSubmit={submitHandler} >
                 <h3 >Completa los datos para Registrarte</h3>
-                <Box >  
-                    <Input type="text" name='name' id="formGroupExampleInput" placeholder="Nombre y Apellido" />
-                </Box>
+           
                 <Box>  
                     <Input type="email" name='email' id="formGroupExampleInput2" placeholder="Email" required />
                 </Box>
