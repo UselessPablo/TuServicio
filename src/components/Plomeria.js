@@ -11,22 +11,28 @@ import Avatar from '@mui/material/Avatar';
 import IconButton, { IconButtonProps } from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
 import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import Rating from '@mui/material/Rating';
 import { random } from 'lodash';
-
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { getFirestore, doc, setDoc, getDoc } from 'firebase/firestore';
+import { useNavigate } from 'react-router-dom';
+const firestore = getFirestore();
+const auth = getAuth();
 interface ExpandMoreProps extends IconButtonProps {
     expand: boolean;
 }
 
-const Plomeria = ({ data }) => {
+const Plomeria = ({ data, isfavorite }) => {
     const [datos, setDatos] = useState([]);
     const [expanded, setExpanded] = React.useState({});
     const [ratings, setRatings] = React.useState({});
+    const [isFavorite, setIsFavorite] = useState({});
     const getRandomColor = () => `#${Math.floor(random(0, 16777215)).toString(16)}`;
-
+    const navigate=useNavigate();
     useEffect(() => {
         setDatos(data);
     }, [data])
@@ -54,7 +60,32 @@ const Plomeria = ({ data }) => {
             [id]: newValue
         }));
     };
-
+    const handleFavoriteClick = async (id, nombre) => {
+        const user = auth.currentUser;
+        if (user) {
+            const userRef = doc(firestore, 'users', user.uid);
+            const docSnap = await getDoc(userRef);
+            const userData = docSnap.data() || {};
+            const { favorites = {} } = userData;
+            const isCurrentlyFavorite = !!favorites[id];
+            setIsFavorite((prevFavorites) => ({
+                ...prevFavorites,
+                [id]: {
+                    isFavorite: !isCurrentlyFavorite,
+                    nombre
+                },
+            }));
+            await setDoc(userRef, {
+                favorites: {
+                    ...favorites,
+                    [id]: !isCurrentlyFavorite,
+                },
+            }, { merge: true });
+        } else {
+            navigate('/Login');
+        }
+    };
+console.log(isFavorite);
     return (
 
         <>
@@ -95,11 +126,12 @@ const Plomeria = ({ data }) => {
                             </CardContent>
                             <CardActions disableSpacing>
 
-                                <IconButton aria-label="add to favorites">
-                                    <FavoriteIcon />
-                                </IconButton>
-                                <IconButton aria-label="share">
-                                    <ShareIcon />
+                                <IconButton
+                                    aria-label="add to favorites"
+                                    onClick={() => handleFavoriteClick(dato.id)}
+                                    className={isFavorite[dato.id] ? 'favorite-button' : ''}
+                                >
+                                    {isFavorite[dato.id] ? <FavoriteIcon color='red' /> : <FavoriteBorderIcon  />}
                                 </IconButton>
 
                                 <ExpandMore

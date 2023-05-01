@@ -1,7 +1,7 @@
 
 import './App.css';
 import Router from './utils/Router';
-import {teal, green, lime, yellow, lightGreen, grey, orange} from '@mui/material/colors';
+import {teal, green, lime, yellow, lightGreen, grey, orange, red} from '@mui/material/colors';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 
 
@@ -12,7 +12,10 @@ function App() {
         // teal and green play nicely together.
         main: teal[100],
       },
-      secondary: {
+     red: {
+       // teal and green play nicely together.
+       main: red[800],
+     }, secondary: {
         main: yellow[400],
       },
       success: {
