@@ -1,7 +1,7 @@
 import { getAuth, signInWithEmailAndPassword, sendPasswordResetEmail, onAuthStateChanged } from 'firebase/auth';
-import React, {useContext, useState, useEffect, useRef } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { Input, Box, Button, Avatar} from '@mui/material';
+import React, { useState, useEffect, useRef } from 'react';
+import { Link} from 'react-router-dom';
+import { Input, Box, Button, Avatar, TextField, Typography} from '@mui/material';
 import app from '../utils/Firebase'
 import {  storage} from '../utils/Firebase';
 import { getDownloadURL,uploadBytes, ref as sRef } from '@firebase/storage';
@@ -124,41 +124,65 @@ const Login = ({ setUsersmail, setAvatarnav }) => {
                 setError(error.message);
             });
     };
-                return (
+          return (
                    
                    <Box sx={{ ml: 6, mt: 3, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignContent: 'center' }}>
                         {user && avatar && (
                             <Avatar src={avatar} />
                         )}
-                       
+                  {!loggedIn && (
                         <form ref={formRef} >
                             <h3 >Ingresa tu usuario y contraseña </h3>
                             <Box >
-                                <Input
+                                <TextField
+                                    variant='filled'
                                     type="email"
                                     name="email" 
                                     onChange={emailHandler}
                                     aria-describedby="emailHelp"
-                                />
+                                    required='true'
+                                   color='info'
+                                /> 
+                        
                             </Box>
                             <Box >
-                                <Input type="password" name='password' id="exampleInputPassword1" />
+                                <TextField color='info' variant='filled' type="password" name='password' id="exampleInputPassword1" />
                             </Box>
                             <p><small className='red'>{error}</small></p>
                             <Button sx={{ ml: 15, mt: 1, mb: 2 }} onClick={handleLogin} variant='contained' color='info' size='small'>Enviar</Button>
                             <p><small>No tienes cuenta? Crea una... <Link to={'/Register'}>REGISTRARSE</Link></small></p>
                             <p><small>Olvidaste tu contraseña </small><Button sx={{ ml: 1 }} variant='outlined' color='warning' size='small' onClick={handlerForgetPassword}>Restablecer</Button></p>
                         </form>
-                      
+                  )}
                         {loggedIn && (
-                            <Box sx={{ mb: 4 }}>
-                                <input type="file" onChange={handleFileChange} />
-                                <button onClick={handleUpload}>Upload</button>
+                           <>
+                            <Box sx= {{}}>
+                            {/* <Box sx={{ mb: 4, ml:6, }}> */}
+                                <Input type="file" onChange={handleFileChange} placeholder='Seleciona una imagen de avatar' />
+                                    <Button onClick={handleUpload}
+                                     variant='contained'
+                                      color='info2'
+                                       size='small'
+                                       sx={{ml:2, mt:2}}
+                                        >cargar imagen</Button>
+                          </Box>
+                          <Typography textAlign='start'sx={{mt:4,ml:5}}>Completa el siguiente formulario</Typography> 
+                            <Box sx={{display:'flex',flexDirection:'column', mt:4}}>
+                               <form className='formDetails'>
+                                <TextField placeholder='Nombre' variant='filled' />
+                                <TextField placeholder='Apellido' variant='filled' />
+                                <TextField placeholder='Dirección' variant='filled' />
+                                <TextField placeholder='Teléfono' variant='filled' />
+                             <Button variant='contained' sx={{mt:2,mb:5}}>Enviar</Button>
+                              </form>
                             </Box>
+                            
+                      </>
                         )}
                         
                     </Box>
                 );
             };
-            
+             
+                    
         export default Login

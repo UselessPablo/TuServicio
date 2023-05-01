@@ -54,6 +54,14 @@ a{
     -ms-flex-direction: column;
     flex-direction: column;
     max-height: calc(100% - 64px);
-    min-width: 400px;
+    min-width: 300px;
     overflow-x: hidden;
+}
+.formDetails{
+  display: flex;
+ flex-wrap: wrap;
+  justify-content: center;
+  width: 300px;
+  margin-left: 2%;
+  
 }
