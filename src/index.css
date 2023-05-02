@@ -73,3 +73,10 @@ a{
     overflow-y: hidden;
     padding: 20px 24px;
 }
+.favoritos{
+  border: none;
+  padding: 0;
+  color: rgb(18, 98, 122);
+  font-size: 0.8rem;
+
+}
