@@ -5,7 +5,7 @@ import {Badge, Box, Typography, Button, Modal, Avatar} from '@mui/material';
 import { Link } from 'react-router-dom';
 
 function Favorites() {
-    const { favoritos } = useFavoriteContext();
+    const { favoritos, handleDeleteFavorite } = useFavoriteContext();
     const [favorites, setFavorites] = useState([]);
     const [open, setOpen] = useState(false)
  
@@ -55,7 +55,9 @@ return (
                                             <Typography>{favorite.nombre}</Typography>
                                             <Typography sx={{margin:1, color:'black'}}>{favorite.categoria}</Typography>
                                             <Avatar variant='rounded' src={favorite.imagen} sx={{mr:1}} />
+                                        
                                         </Link>
+                                        <Button onClick={handleDeleteFavorite}>eliminar</Button>
                                     </Box>
                                     )}
                             </Box>

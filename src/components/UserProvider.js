@@ -52,10 +52,37 @@ export const UserProvider = ({ children }) => {
       },
     }, { merge: true });
   };
+  const handleDeleteFavorite = async (id) => {
+    const user = auth.currentUser;
+    if (!user) {
+      console.log('Debes iniciar sesión para eliminar favoritos.');
+      return;
+    }
+
+    const userRef = doc(firestore, 'users', user.uid);
+    const docSnap = await getDoc(userRef);
+    const userData = docSnap.data() || {};
+    const { favoritos = {} } = userData;
+
+    // Elimina el favorito con el id correspondiente
+    const newFavoritos = Object.keys(favoritos)
+      .filter((key) => key !== id)
+      .reduce((obj, key) => {
+        obj[key] = favoritos[key];
+        return obj;
+      }, {});
+
+    setFavoritos(newFavoritos);
+
+    // Actualiza el documento del usuario en Firestore sin el elemento eliminado
+    await setDoc(userRef, { favoritos: newFavoritos }, { merge: true });
+  };
+
 console.log(favoritos);
 
   return (
-    <userContext.Provider value={{ favoritos, handleFavoriteClick }}>
+    <userContext.Provider value={{ favoritos, handleFavoriteClick, handleDeleteFavorite
+     }}>
       {children}
     </userContext.Provider>
 
