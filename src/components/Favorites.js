@@ -34,7 +34,7 @@ return (
             </Badge>
         </Button>
         <Modal
-        sx={{display:'flex', justifyContent:'center'}}
+        sx={{display:'flex', justifyContent:'center', minWidth:'100%'}}
             open={open}
             onClose={handleClose}
             aria-labelledby="modal-modal-title"
@@ -51,7 +51,7 @@ return (
                                 {favorite &&
                                     (
                                     <Box sx={{ display: 'flex', flexDirection: 'row' }}>
-                                        <Link className='favoritos' to={`/detalle/${favorite.id}`}>
+                                        <Link className='favoritos' to={`/detalle/${favorite.id}`} onClick={()=>{handleClose && handleClose()}}>
                                             <Typography>{favorite.nombre}</Typography>
                                             <Typography sx={{margin:1, color:'black'}}>{favorite.categoria}</Typography>
                                             <Avatar variant='rounded' src={favorite.imagen} sx={{mr:1}} />
