@@ -18,13 +18,17 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import Rating from '@mui/material/Rating';
 import { random } from 'lodash';
+import { useFavoriteContext } from '../components/UserProvider';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+
 
 const Construccion = ({ data }) => {
     const [datos, setDatos] = useState([]);
     const [expanded, setExpanded] = React.useState({});
     const [ratings, setRatings] = React.useState({});
     const getRandomColor = () => `#${Math.floor(random(0, 16777215)).toString(16)}`;
-
+    const { handleFavoriteClick, favoritos } = useFavoriteContext();
+    const [isFavorite, setIsFavorite] = useState(false);
     useEffect(() => {
         setDatos(data);
     }, [data])
@@ -95,12 +99,19 @@ const Construccion = ({ data }) => {
                                 />
                             </CardContent>
                             <CardActions disableSpacing>
-                                <IconButton aria-label="add to favorites">
-                                    <FavoriteIcon />
-                                </IconButton>
-                                <IconButton aria-label="share">
-                                    <ShareIcon />
-                                </IconButton>
+                                <FavoriteIcon
+                                    aria-label="add to favorites"
+                                    onClick={() => {
+                                        handleFavoriteClick(dato.id, dato.nombre, dato.imagen, dato.categoria);
+                                        setIsFavorite((prevIsFavorite) => ({
+                                            ...prevIsFavorite,
+                                            [dato.id]: true
+                                        }));
+                                    }}
+                                    className={isFavorite[dato.id] ? 'favorite-button-selected' : 'favorite-button'}
+                                >
+
+                                </FavoriteIcon> 
 
                                 <ExpandMore
                                     expand={expanded[dato.id] || false}

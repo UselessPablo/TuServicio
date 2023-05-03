@@ -27,9 +27,12 @@ const Plomeria = ({ data, isfavorite }) => {
     const [datos, setDatos] = useState([]);
     const [expanded, setExpanded] = React.useState({});
     const [ratings, setRatings] = React.useState({});
-    const [isFavorite, setIsFavorite] = useState(false);
+    const [isFavorite, setIsFavorite] = useState({});
     const { handleFavoriteClick, favoritos } = useFavoriteContext();
-    const getRandomColor = () => `#${Math.floor(random(0, 16777215)).toString(16)}`;
+   
+       const getRandomColor = () => `#${Math.floor(random(0, 16777215)).toString(16)}`;
+
+    
    
     useEffect(() => {
         setDatos(data);
@@ -59,7 +62,7 @@ const Plomeria = ({ data, isfavorite }) => {
         }));
     };
  
-    
+    console.log(isFavorite);
     return (
 
         <>
@@ -99,17 +102,19 @@ const Plomeria = ({ data, isfavorite }) => {
                                 />
                             </CardContent>
                             <CardActions disableSpacing>
-                                <IconButton
+                                <FavoriteIcon
                                     aria-label="add to favorites"
-                                    onClick={() => handleFavoriteClick(dato.id, dato.nombre)}
-                                    className={isFavorite[dato.id] ? 'favorite-button' : ''}
+                                    onClick={() => {
+                                        handleFavoriteClick(dato.id, dato.nombre, dato.imagen, dato.categoria);
+                                        setIsFavorite((prevIsFavorite) => ({
+                                            ...prevIsFavorite,
+                                            [dato.id]: true
+                                        }));
+                                    }}
+                                    className={isFavorite[dato.id] ? 'favorite-button-selected' : 'favorite-button'}
                                 >
-                                    {favoritos && favoritos[dato.id]?.isFavorite ? (
-                                        <FavoriteIcon color="error" />
-                                    ) : (
-                                        <FavoriteBorderIcon />
-                                    )}
-                                </IconButton>
+                            
+                                </FavoriteIcon> 
                                 <ExpandMore
                                     expand={expanded[dato.id] || false}
                                     onClick={() => handleExpandClick(dato.id)}

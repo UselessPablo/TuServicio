@@ -16,14 +16,14 @@ export const useFavoriteContext = () => {
 export const UserProvider = ({ children }) => {
   const [favoritos, setFavoritos] = useState([])
   
-  const handleFavoriteClick = async (id, nombre) => {
+  const handleFavoriteClick = async (id, nombre, imagen, categoria) => {
     const user = auth.currentUser;
     if (!user) {
       // Si no hay un usuario autenticado, no se pueden agregar favoritos.
       console.log('Debes iniciar sesión para agregar favoritos.');
       return;
     }
-
+    
     const userRef = doc(firestore, 'users', user.uid);
     const docSnap = await getDoc(userRef);
     const userData = docSnap.data() || {};
@@ -34,6 +34,8 @@ export const UserProvider = ({ children }) => {
       [id]: {
         id,
         nombre,
+        imagen,
+        categoria,
         isFavorite: !isCurrentlyFavorite
       },
     }));
@@ -43,12 +45,14 @@ export const UserProvider = ({ children }) => {
         [id]: {
           id,
           nombre,
+          imagen,
+          categoria,
           isFavorite: !isCurrentlyFavorite
         },
       },
     }, { merge: true });
   };
-
+console.log(favoritos);
 
   return (
     <userContext.Provider value={{ favoritos, handleFavoriteClick }}>

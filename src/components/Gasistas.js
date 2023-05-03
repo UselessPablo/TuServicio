@@ -10,6 +10,8 @@ import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import Rating from '@mui/material/Rating';
+import { useFavoriteContext } from '../components/UserProvider';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
 const Gasistas = ({ data }) => {
 
@@ -17,7 +19,8 @@ const Gasistas = ({ data }) => {
     const [expanded, setExpanded] = useState({});
     const [ratings, setRatings] = useState({});
     const getRandomColor = () => `#${Math.floor(random(0, 16777215)).toString(16)}`;
-
+    const [isFavorite, setIsFavorite] = useState(false);
+     const { handleFavoriteClick, favoritos } = useFavoriteContext();
     useEffect(() => {
         setDatos(data);
     }, [data])
@@ -91,13 +94,19 @@ const Gasistas = ({ data }) => {
                                 />
                             </CardContent>
                             <CardActions disableSpacing>
+                                <FavoriteIcon
+                                    aria-label="add to favorites"
+                                    onClick={() => {
+                                        handleFavoriteClick(dato.id, dato.nombre, dato.imagen, dato.categoria);
+                                        setIsFavorite((prevIsFavorite) => ({
+                                            ...prevIsFavorite,
+                                            [dato.id]: true
+                                        }));
+                                    }}
+                                    className={isFavorite[dato.id] ? 'favorite-button-selected' : 'favorite-button'}
+                                >
 
-                                <IconButton aria-label="add to favorites">
-                                    <FavoriteIcon />
-                                </IconButton>
-                                <IconButton aria-label="share">
-                                    <ShareIcon />
-                                </IconButton>
+                                </FavoriteIcon> 
                                 <ExpandMore
                                     expand={expanded[dato.id] || false}
                                     onClick={() => handleExpandClick(dato.id)}

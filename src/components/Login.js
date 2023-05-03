@@ -1,4 +1,4 @@
-import { getAuth, signInWithEmailAndPassword, sendPasswordResetEmail, onAuthStateChanged } from 'firebase/auth';
+import { getAuth, signInWithEmailAndPassword, sendPasswordResetEmail, onAuthStateChanged, signOut } from 'firebase/auth';
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate} from 'react-router-dom';
 import { Input, Box, Button, Avatar, TextField, Typography} from '@mui/material';
@@ -174,8 +174,14 @@ const Login = ({ setUsersmail, setAvatarnav, setNombreLog, setApellidoLog, setTe
                 setError(error.message);
             });
     };
-
-
+  
+    const handlelogout = () => {
+    signOut(user).then(() => {
+        // Sign-out successful.
+    }).catch((error) => {
+        // An error happened.
+    });
+   }
 
     return (
                    
@@ -198,6 +204,7 @@ const Login = ({ setUsersmail, setAvatarnav, setNombreLog, setApellidoLog, setTe
                                 /> 
                         
                             </Box>
+                    
                             <Box >
                                 <TextField color='info' variant='filled' type="password" name='password' id="exampleInputPassword1" />
                             </Box>
@@ -233,7 +240,7 @@ const Login = ({ setUsersmail, setAvatarnav, setNombreLog, setApellidoLog, setTe
                             
                       </>
                         )}
-                        
+                       
                     </Box>
                 );
             };

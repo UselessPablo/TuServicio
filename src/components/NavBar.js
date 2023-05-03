@@ -91,7 +91,7 @@ const handleClose = () =>{
                     <Typography variant="h1" fontSize='1.4rem' component="div" fontWeight='bold' sx={{ flexGrow: 1, ml: 2 }}>
                         TuServicio
                     </Typography>
-                    <Favorites /> 
+                
                     <Box sx={{ ml: 4, display: 'flex', flexDirection: 'column-reverse', justifyContent: 'center' }}>
                         <Button onClick={register} color="success" variant='contained' size='small' sx={{ maxHeight: 27, padding: 1, mt: 1, width: '50%' }}>Login</Button>
                         <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignContent: 'center' }}>
@@ -114,9 +114,10 @@ const handleClose = () =>{
                                         <Typography>Apellido: {apellido}</Typography>
                                         <Typography>Contacto:  {telefono}</Typography>
                                     </ListItem>
+                                    <Favorites /> 
                                 </List>
                             </DialogContent>
-                            <DialogActions>
+                            <DialogActions >
                                 <Button onClick={handleClose} color='info'>Cerrar</Button>
                             </DialogActions>
                         </Dialog>
@@ -135,9 +136,9 @@ const handleClose = () =>{
                     <Button onClick={goReparaciones} size='small' color='grey' sx={{ fontSize: '0.7rem', mr: 2, mt: 1, fontWeight: 'bold' }}><BuildRoundedIcon sx={{ color: 'orangeRed', mr: 2 }} />  Todos   </Button>
                 </List>
                 <Divider />
-             
-                    <Button onClick={info} color='error' variant='contained' size='small' sx={{ ml: 6, mt: 3, maxHeight: 22 }}>info</Button>
-              
+             <Box sx={{display:'flex', justifyContent:'center'}}>
+                    <Button onClick={info} color='error' variant='contained' size='small' sx={{mt: 3, maxHeight: 22 }}>info</Button>
+                </Box>
             </Drawer>
             <Box sx={{ display: 'flex', justifyContent: 'center', flexDirection: 'column', alignContent: 'center', mt: 2 }}>
                 <SearchBar />
