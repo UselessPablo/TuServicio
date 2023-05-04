@@ -142,9 +142,7 @@ const handleClose = () =>{
             </Drawer>
             <Box sx={{ display: 'flex', justifyContent: 'center', flexDirection: 'column', alignContent: 'center', mt: 2 }}>
                 <SearchBar />
-                <h2>
-                    En esta página podrás encontrar el servicio que necesitas, ya sea reparaciones simples, como construcción de vivienda
-                </h2>
+             
             </Box>
         </Box>
 

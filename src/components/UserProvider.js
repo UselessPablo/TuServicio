@@ -55,7 +55,6 @@ export const UserProvider = ({ children }) => {
   const handleDeleteFavorite = async (id) => {
     const user = auth.currentUser;
     if (!user) {
-      // Si no hay un usuario autenticado, no se pueden eliminar favoritos.
       console.log('Debes iniciar sesión para eliminar favoritos.');
       return;
     }
@@ -72,9 +71,20 @@ export const UserProvider = ({ children }) => {
     // Actualiza la lista de favoritos en el estado del componente.
     setFavoritos(Object.values(newFavorites));
   };
+  const handleToggleFavorite = (id) => {
+    const updatedFavorites = favoritos ? [...favoritos] : [];
+    const index = updatedFavorites.findIndex((favorite) => favorite.id === id);
+    if (index > -1) {
+      updatedFavorites.splice(index, 1);
+    } else {
+      const newFavorite = favoritos.find((dato) => dato.id === id);
+      updatedFavorites.push(newFavorite);
+    }
+    setFavoritos(updatedFavorites);
+  };
 
   return (
-    <userContext.Provider value={{ favoritos, handleFavoriteClick, handleDeleteFavorite, 
+    <userContext.Provider value={{ favoritos, handleFavoriteClick, handleDeleteFavorite, handleToggleFavorite
      }}>
       {children}
     </userContext.Provider>

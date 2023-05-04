@@ -6,20 +6,17 @@ import {
 import { useState, useEffect } from "react";
 import { random } from 'lodash';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
 import Rating from '@mui/material/Rating';
 import { useFavoriteContext } from '../components/UserProvider';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
-const Gasistas = ({ data }) => {
+const Gasistas = ({ data}) => {
 
     const [datos, setDatos] = useState([]);
     const [expanded, setExpanded] = useState({});
     const [ratings, setRatings] = useState({});
     const getRandomColor = () => `#${Math.floor(random(0, 16777215)).toString(16)}`;
-    const [isFavorite, setIsFavorite] = useState(false);
+    const [isFavorite, setIsFavorite] = useState({});
      const { handleFavoriteClick, favoritos } = useFavoriteContext();
     useEffect(() => {
         setDatos(data);
@@ -69,11 +66,6 @@ const Gasistas = ({ data }) => {
                                         {dato.letra}
                                     </Avatar>
                                 }
-                                action={
-                                    <IconButton aria-label="settings">
-                                        <MoreVertIcon />
-                                    </IconButton>
-                                }
                                 title={dato.nombre}
                             />
                             <CardMedia component="img" height="194" image={dato.imagen} alt={dato.nombre} />
@@ -100,9 +92,10 @@ const Gasistas = ({ data }) => {
                                         handleFavoriteClick(dato.id, dato.nombre, dato.imagen, dato.categoria);
                                         setIsFavorite((prevIsFavorite) => ({
                                             ...prevIsFavorite,
-                                            [dato.id]: true
+                                            [dato.id]: !prevIsFavorite[dato.id]
                                         }));
                                     }}
+
                                     className={isFavorite[dato.id] ? 'favorite-button-selected' : 'favorite-button'}
                                 >
 
@@ -112,6 +105,7 @@ const Gasistas = ({ data }) => {
                                     onClick={() => handleExpandClick(dato.id)}
                                     aria-expanded={expanded[dato.id] || false}
                                     aria-label="show more"
+                                    color="fondo"
                                 >
                                     <ExpandMoreIcon />
                                 </ExpandMore>

@@ -77,11 +77,6 @@ const Plomeria = ({ data, isfavorite }) => {
                                         {dato.letra}
                                     </Avatar>
                                 }
-                                action={
-                                    <IconButton aria-label="settings">
-                                        <MoreVertIcon />
-                                    </IconButton>
-                                }
                                 title={dato.nombre}
                             />
                             <CardMedia component="img" height="194" image={dato.imagen} alt={dato.nombre} />
@@ -108,18 +103,19 @@ const Plomeria = ({ data, isfavorite }) => {
                                         handleFavoriteClick(dato.id, dato.nombre, dato.imagen, dato.categoria);
                                         setIsFavorite((prevIsFavorite) => ({
                                             ...prevIsFavorite,
-                                            [dato.id]: true
+                                            [dato.id]: !prevIsFavorite[dato.id]
                                         }));
                                     }}
+
                                     className={isFavorite[dato.id] ? 'favorite-button-selected' : 'favorite-button'}
                                 >
-                            
                                 </FavoriteIcon> 
                                 <ExpandMore
                                     expand={expanded[dato.id] || false}
                                     onClick={() => handleExpandClick(dato.id)}
                                     aria-expanded={expanded[dato.id] || false}
                                     aria-label="show more"
+                                    color='fondo'
                                 >
                                     <ExpandMoreIcon />
                                 </ExpandMore>

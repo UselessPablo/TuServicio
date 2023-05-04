@@ -8,13 +8,14 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import Rating from '@mui/material/Rating';
 import { useFavoriteContext } from '../components/UserProvider';
-const Reparaciones = ({ data }) => {
+
+const Reparaciones = ({ data}) => {
 
     const [datos, setDatos] = useState([]);
     const [expanded, setExpanded] = useState({});
     const [ratings, setRatings] = useState({});
     const getRandomColor = () => `#${Math.floor(random(0, 16777215)).toString(16)}`;
-    const [isFavorite, setIsFavorite] = useState(false);
+    const [isFavorite, setIsFavorite] = useState({});
     const { handleFavoriteClick, favoritos } = useFavoriteContext();
     useEffect(() => {
         setDatos(data);
@@ -62,11 +63,7 @@ const Reparaciones = ({ data }) => {
                                         {dato.letra}
                                     </Avatar>
                                 }
-                                action={
-                                    <IconButton aria-label="settings">
-                                        <MoreVertIcon />
-                                    </IconButton>
-                                }
+                          
                                 title={dato.nombre}
                             />
                             <CardMedia component="img" height="194" image={dato.imagen} alt={dato.nombre} />
@@ -93,9 +90,10 @@ const Reparaciones = ({ data }) => {
                                         handleFavoriteClick(dato.id, dato.nombre, dato.imagen, dato.categoria);
                                         setIsFavorite((prevIsFavorite) => ({
                                             ...prevIsFavorite,
-                                            [dato.id]: true
+                                            [dato.id]: !prevIsFavorite[dato.id]
                                         }));
                                     }}
+
                                     className={isFavorite[dato.id] ? 'favorite-button-selected' : 'favorite-button'}
                                 >
 
@@ -105,6 +103,7 @@ const Reparaciones = ({ data }) => {
                                     onClick={() => handleExpandClick(dato.id)}
                                     aria-expanded={expanded[dato.id] || false}
                                     aria-label="show more"
+                                    color='fondo'
                                 >
                                     <ExpandMoreIcon />
                                 </ExpandMore>

@@ -29,7 +29,7 @@ function App() {
         main: teal[300],
       },
       fondo: {
-        main: green[400],
+        main: green[700],
       },
       eliminar:{
         main:lime[900],

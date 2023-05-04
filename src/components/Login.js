@@ -185,8 +185,7 @@ const Login = ({ setUsersmail, setAvatarnav, setNombreLog, setApellidoLog, setTe
 
     return (
 
-        <Box sx={{ ml: 6, mt: 3, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignContent: 'center' }}>
-           
+        <Box sx={{ ml: 6, mt: 3, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignContent: 'center' }}>   
             {user && avatar && (
                 <Avatar src={avatar} />
             )}
@@ -203,8 +202,7 @@ const Login = ({ setUsersmail, setAvatarnav, setNombreLog, setApellidoLog, setTe
                             required='true'
                             color='info'
                         />
-                    </Box>
-                 
+                    </Box>    
                     <Box >
                         <TextField
                             variant='filled'
@@ -218,15 +216,13 @@ const Login = ({ setUsersmail, setAvatarnav, setNombreLog, setApellidoLog, setTe
                             {showPassword ? <VisibilityOff /> : <Visibility />}
                         </IconButton>
                     </Box>
-                    <p><small className='red'>{error}</small></p>
-                   
+                    <p><small className='red'>{error}</small></p>            
                     <Button sx={{ ml: 15, mt: 1, mb: 2 }} onClick={handleLogin} variant='contained' color='info' size='small'>Enviar</Button>
                     <p><small>No tienes cuenta? Crea una... <Link to={'/Register'}>REGISTRARSE</Link></small></p>
                     <p><small>Olvidaste tu contraseña </small><Button sx={{ ml: 1 }} variant='outlined' color='warning' size='small' onClick={handlerForgetPassword}>Restablecer</Button></p>
                     <p><small>Abandonar sesión</small>   <Button sx={{backgroundColor:'red.main', color:'white',ml:2}} variant="contained"  size='small' onClick={handleLogout}>
                         Logout
-                    </Button> </p>
-                 
+                    </Button> </p>          
                 </form>
             )}
             {loggedIn && (

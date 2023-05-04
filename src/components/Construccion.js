@@ -74,11 +74,6 @@ const Construccion = ({ data }) => {
                                         {dato.letra}
                                     </Avatar>
                                 }
-                                action={
-                                    <IconButton aria-label="settings">
-                                        <MoreVertIcon />
-                                    </IconButton>
-                                }
                                 title={dato.nombre}
                             />
                             <CardMedia component="img" height="194" image={dato.imagen} alt={dato.nombre} />
@@ -118,6 +113,7 @@ const Construccion = ({ data }) => {
                                     onClick={() => handleExpandClick(dato.id)}
                                     aria-expanded={expanded[dato.id] || false}
                                     aria-label="show more"
+                                    color='fondo'
                                 >
                                     <ExpandMoreIcon />
                                 </ExpandMore>
