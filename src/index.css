@@ -99,3 +99,11 @@ form{
 .error{
   color: red;
 }
+.whats{
+  background-color: transparent;
+  color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+}

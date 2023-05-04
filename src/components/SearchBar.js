@@ -113,7 +113,7 @@ function SearchBar() {
                                             sx={{
                                                 pb: 0.1,
                                                 ml: 1,
-                                                color: 'info2.main',
+                                                color: 'navbar.main',
                                             }}
                                        
                                         />

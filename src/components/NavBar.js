@@ -80,7 +80,7 @@ const handleClose = () =>{
 
         <Box sx={{ flexGrow: 1, padding: 1, width: '98%'}}>
 
-            <AppBar position="sticky" elevation='0' sx={{ backgroundColor: 'pop2.main', pb: 2, borderRadius:3 }}>
+            <AppBar position="sticky" elevation='0' sx={{ backgroundColor: 'navbar.main', pb: 2, borderRadius:3 }}>
                 <Toolbar>
                     <IconButton
                         size="medium"
@@ -100,7 +100,7 @@ const handleClose = () =>{
                         <Button onClick={register} color="success" variant='contained' size='small' sx={{ maxHeight: 27, padding: 1, mt: 1, width: '50%' }}>Login</Button>
                         <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignContent: 'center' }}>
                             <Button onClick={handleClickOpen} >
-                                <Avatar src={avatar} sx={{}} alt={user} />
+                                <Avatar src={avatar} sx={{mt:1}} alt={user} />
                             </Button>
                             
                         </Box>

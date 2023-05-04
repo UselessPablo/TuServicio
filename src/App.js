@@ -2,7 +2,7 @@
 import './App.css';
 import { UserProvider } from './components/UserProvider';
 import Router from './utils/Router';
-import {teal, green, lime, yellow, lightGreen, grey, orange, red} from '@mui/material/colors';
+import {teal, green, lime, yellow, lightGreen, grey, orange, red, cyan} from '@mui/material/colors';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 
 
@@ -39,6 +39,9 @@ function App() {
       },
      pop2: {
        main: orange[600],
+     },
+     navbar: {
+       main: cyan[900],
      },
  fondoDrawer: {
          main: teal[200],
