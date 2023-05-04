@@ -46,7 +46,7 @@ const Home = () => {
 
         </Grid>
         <Grid item xs={6}>
-          <Box sx={{ backgroundColor: 'red', height: 200, mb: 1, display: "flex", justifyContent: "center", alignItems: 'center', borderRadius: 4 }}>
+          <Box sx={{ backgroundColor: 'red.main', height: 200, mb: 1, display: "flex", justifyContent: "center", alignItems: 'center', borderRadius: 4 }}>
             <Button onClick={goGasista}>
               <span title='Gasistas' >
                 <PropaneTankRoundedIcon sx={{ width: "70%", height: "80%", color: 'white' }} />

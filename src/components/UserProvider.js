@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState, useContext } from 'react'
 import { setDoc, doc, getDoc } from 'firebase/firestore';
-import { getFirestore } from 'firebase/firestore';
+import { getFirestore} from 'firebase/firestore';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import app from '../utils/Firebase'
 
@@ -55,6 +55,7 @@ export const UserProvider = ({ children }) => {
   const handleDeleteFavorite = async (id) => {
     const user = auth.currentUser;
     if (!user) {
+      // Si no hay un usuario autenticado, no se pueden eliminar favoritos.
       console.log('Debes iniciar sesión para eliminar favoritos.');
       return;
     }
@@ -63,25 +64,17 @@ export const UserProvider = ({ children }) => {
     const docSnap = await getDoc(userRef);
     const userData = docSnap.data() || {};
     const { favoritos = {} } = userData;
+    const newFavorites = { ...favoritos };
+    delete newFavorites[id];
+    setFavoritos(newFavorites);
+    await setDoc(userRef, { favoritos: newFavorites }, { merge: true });
 
-    // Elimina el favorito con el id correspondiente
-    const newFavoritos = Object.keys(favoritos)
-      .filter((key) => key !== id)
-      .reduce((obj, key) => {
-        obj[key] = favoritos[key];
-        return obj;
-      }, {});
-
-    setFavoritos(newFavoritos);
-
-    // Actualiza el documento del usuario en Firestore sin el elemento eliminado
-    await setDoc(userRef, { favoritos: newFavoritos }, { merge: true });
+    // Actualiza la lista de favoritos en el estado del componente.
+    setFavoritos(Object.values(newFavorites));
   };
 
-console.log(favoritos);
-
   return (
-    <userContext.Provider value={{ favoritos, handleFavoriteClick, handleDeleteFavorite
+    <userContext.Provider value={{ favoritos, handleFavoriteClick, handleDeleteFavorite, 
      }}>
       {children}
     </userContext.Provider>

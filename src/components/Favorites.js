@@ -47,32 +47,28 @@ return (
                 {favorites.length > 0 && (
                     <Box  >
                         {favorites.map((favorite) => (
-                            <Box key={favorite.id} >
-                                {favorite &&
-                                    (
+                            <Box key={favorite.id}>
+                                {favorite && (
                                     <Box sx={{ display: 'flex', flexDirection: 'row' }}>
-                                        <Link className='favoritos' to={`/detalle/${favorite.id}`} onClick={()=>{handleClose && handleClose()}}>
+                                        <Link className='favoritos' to={`/detalle/${favorite.id}`} onClick={() => { handleClose && handleClose() }}>
                                             <Typography>{favorite.nombre}</Typography>
-                                            <Typography sx={{margin:1, color:'black'}}>{favorite.categoria}</Typography>
-                                            <Avatar variant='rounded' src={favorite.imagen} sx={{mr:1}} />
-                                        
+                                            <Typography sx={{ margin: 1, color: 'black' }}>{favorite.categoria}</Typography>
+                                            <Avatar variant='rounded' src={favorite.imagen} sx={{ mr: 1 }} />
                                         </Link>
-                                        <Button onClick={handleDeleteFavorite}>eliminar</Button>
+                                        <Button onClick={() => handleDeleteFavorite(favorite.id)}>eliminar</Button>
                                     </Box>
-                                    )}
+                                )}
                             </Box>
                         ))}
+
                     </Box>
-                )} {/* Aquí puedes renderizar el nuevo componente que deseas mostrar */}
+                )} 
                 <Button onClick={handleClose} color='pop' size='small' variant='contained' sx={{ mt: 1 }}>Cerrar</Button>
           
             </Box>
         </Modal>
-      
     </Box>
-  
     );
-    
 }
 
 export default Favorites;

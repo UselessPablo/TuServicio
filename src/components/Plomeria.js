@@ -31,7 +31,7 @@ const Plomeria = ({ data, isfavorite }) => {
     const { handleFavoriteClick, favoritos } = useFavoriteContext();
    
        const getRandomColor = () => `#${Math.floor(random(0, 16777215)).toString(16)}`;
-
+    
     
    
     useEffect(() => {
