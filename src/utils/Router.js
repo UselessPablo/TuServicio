@@ -6,6 +6,7 @@ import Info from '../components/Info';
 import Gas from '../components/Gas';
 import DetalleReparaciones from '../components/DetalleReparaciones';
 import DetalleConstruccion from '../components/DetalleConstruccion';
+import DetallePintura from '../components/DetallePintura'
 import DetalleCard from '../components/DetalleCard';
 import Login from '../components/Login'
 import Register from '../components/Register';
@@ -35,6 +36,7 @@ const [telefonos, setTelefonos] = useState(null)
          <Route path='/Gasistas/' element={<Gas/>}/>
          <Route path='/Reparaciones' element={<DetalleReparaciones/>} />
          <Route path='/Construccion' element={<DetalleConstruccion/>}/>
+         <Route path='/Pintura' element={<DetallePintura/>} />
          <Route path='/detalle/:id' element={<DetalleCard/>}/>
          <Route path='/Login' element={<Login 
          setAvatarnav={setAvatar}
