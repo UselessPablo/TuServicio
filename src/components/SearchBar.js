@@ -103,7 +103,7 @@ function SearchBar() {
                             InputProps={{
                                 sx: {
                                     borderRadius: 1,
-                                    color:'white',
+                                    color:'black',
                                 },          
                                 ...params.InputProps,
                                 endAdornment: (
@@ -113,7 +113,7 @@ function SearchBar() {
                                             sx={{
                                                 pb: 0.1,
                                                 ml: 1,
-                                                color: 'white',
+                                                color: 'info2.main',
                                             }}
                                        
                                         />

@@ -5,7 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: rgba(6, 43, 30, 0.644);
+  background-color: rgba(171, 253, 225, 0.644);
 }
 
 code {
@@ -56,7 +56,7 @@ font-weight: 400;
     -ms-flex-direction: column;
     flex-direction: column;
     max-height: calc(100% - 64px);
-    min-width: 300px;
+    min-width: 80vw;
     overflow-x: hidden;
 }
 .formDetails{

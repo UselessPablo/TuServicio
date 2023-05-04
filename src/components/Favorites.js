@@ -98,13 +98,13 @@ function Favorites() {
                 </Badge>
             </Button>
             <Modal
-                sx={{ display: 'flex', justifyContent: 'center', minWidth: '100%' }}
+                sx={{ display: 'flex', justifyContent: 'center', minWidth: '80vw' }}
                 open={open}
                 onClose={handleClose}
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
             >
-                <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', backgroundColor: 'white', width: '50%', height: '50%', p: 3 }}>
+                <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', backgroundColor: 'white', width: '80vw', height: '50%', p: 3, mt:5 }}>
                     <Typography variant="h5" component="h2" sx={{ my: 2 }}>
                         Favoritos
                     </Typography>
