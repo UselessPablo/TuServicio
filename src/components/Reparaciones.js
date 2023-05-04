@@ -55,9 +55,9 @@ const Reparaciones = ({ data}) => {
             <Typography textAlign='center' variant='h6' sx={{ padding: 1, borderRadius: 2, width: '180px', margin: '0 auto', mt: 2 }}>Reparaciones Varias</Typography>
             <Box sx={{ display: 'flex', flexWrap: 'wrap', m: 1, justifyContent: 'center' }}>
                 {datos.map((dato) => (
-                    <Box key={dato.id} sx={{ width: '100%', maxWidth: 180, m: 1 }}>
-                        <Card>
-                            <CardHeader
+                    <Box key={dato.id} sx={{ width: '100%', maxWidth: 200, m: 1 }}>
+                        <Card sx={{ color: 'info.main' }}>
+                            <CardHeader sx={{ backgroundColor: 'fondoCard.main', color: 'white' }}
                                 avatar={
                                     <Avatar sx={{ bgcolor: getRandomColor(), width: 30, height: 30 }} aria-label={dato.nombre}>
                                         {dato.letra}
@@ -67,7 +67,7 @@ const Reparaciones = ({ data}) => {
                                 title={dato.nombre}
                             />
                             <CardMedia component="img" height="194" image={dato.imagen} alt={dato.nombre} />
-                            <CardContent sx={{ overflow: 'auto', maxHeight: '250px' }}>
+                            <CardContent sx={{ overflow: 'auto', maxHeight: '250px', backgroundColor: 'fondoDrawer.main' }}>
                                 <Typography variant="body2" color="black" fontWeight='bold' textAlign='center' sx={{ mb: 1, mt: 1 }}>
                                     {dato.categoria}
                                 </Typography>
@@ -83,7 +83,7 @@ const Reparaciones = ({ data}) => {
                                     }}
                                 />
                             </CardContent>
-                            <CardActions disableSpacing>
+                            <CardActions disableSpacing sx={{ backgroundColor: 'secondary.main' }}>
                                 <FavoriteIcon
                                     aria-label="add to favorites"
                                     onClick={() => {

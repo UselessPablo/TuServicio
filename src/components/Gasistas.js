@@ -58,9 +58,9 @@ const Gasistas = ({ data}) => {
             <Box sx={{ display: 'flex', flexWrap: 'wrap', m: 1, justifyContent: 'center' }}>
 
                 {datos.map((dato) => (
-                    <Box key={dato.id} sx={{ width: '100%', maxWidth: 180, m: 1 }}>
-                        <Card>
-                            <CardHeader
+                    <Box key={dato.id} sx={{ width: '100%', maxWidth: 200, m: 1 }}>
+                        <Card sx={{ color: 'info.main' }}>
+                            <CardHeader sx={{backgroundColor:'fondoCard.main', color:'white'}}
                                 avatar={
                                     <Avatar sx={{ bgcolor: getRandomColor(), width: 30, height: 30 }} aria-label={dato.nombre}>
                                         {dato.letra}
@@ -69,7 +69,7 @@ const Gasistas = ({ data}) => {
                                 title={dato.nombre}
                             />
                             <CardMedia component="img" height="194" image={dato.imagen} alt={dato.nombre} />
-                            <CardContent sx={{ overflow: 'auto', maxHeight: '250px' }}>
+                            <CardContent sx={{ overflow: 'auto', maxHeight: '250px', backgroundColor: 'fondoDrawer.main' }}>
                                 <Typography variant="body2" color="black" fontWeight='bold' textAlign='center' sx={{ mb: 1, mt: 1 }}>
                                     {dato.categoria}
                                 </Typography>
@@ -85,7 +85,7 @@ const Gasistas = ({ data}) => {
                                     }}
                                 />
                             </CardContent>
-                            <CardActions disableSpacing>
+                            <CardActions disableSpacing sx={{backgroundColor:'secondary.main'}}>
                                 <FavoriteIcon
                                     aria-label="add to favorites"
                                     onClick={() => {

@@ -78,21 +78,21 @@ const handleClose = () =>{
   
     return (
 
-        <Box sx={{ flexGrow: 1, padding: 1, width: '98%' }}>
+        <Box sx={{ flexGrow: 1, padding: 1, width: '98%'}}>
 
-            <AppBar position="sticky" elevation='0' sx={{ backgroundColor: 'transparent', pb: 2 }}>
+            <AppBar position="sticky" elevation='0' sx={{ backgroundColor: 'pop2.main', pb: 2, borderRadius:3 }}>
                 <Toolbar>
                     <IconButton
                         size="medium"
                         edge="left"
-                        color="inherit"
+                        color="dark"
                         aria-label="menu"
-                        sx={{}}
+                        sx={{mt:1, backgroundColor:'whitesmoke'}}
                         onClick={() => toggleDrawer('left', true)}
                     >
                         <MenuIcon />
                     </IconButton>
-                    <Typography variant="h1" fontSize='1.4rem' component="div" fontWeight='bold' sx={{ flexGrow: 1, ml: 2 }}>
+                    <Typography variant="h1" fontSize='1.4rem' component="div" fontWeight='bold' color='whitesmoke' sx={{ flexGrow: 1, ml: 2,mt:1 }}>
                         TuServicio
                     </Typography>
                 

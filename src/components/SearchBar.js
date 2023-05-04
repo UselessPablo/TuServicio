@@ -67,6 +67,7 @@ function SearchBar() {
 
             <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
                 <Autocomplete
+               
                     open={searchOpen}
                     onOpen={() => setSearchOpen(true)}
                     onClose={() => setSearchOpen(false)}
@@ -84,7 +85,7 @@ function SearchBar() {
                                 setSearchOpen(false);
                             }}
                         >
-                            <Typography fontSize='0.8rem' fontWeight='bold' sx={{ mr: 1 }}>{option.categoria}</Typography>
+                            <Typography fontSize='0.8rem' fontWeight='bold' sx={{ mr: 1}}>{option.categoria}</Typography>
                             <img className='mini' src={option.imagen} alt='x' />
                             <Typography fontSize='0.7rem' sx={{ ml: 1 }}>{option.nombre} </Typography>
                         </li>
@@ -93,7 +94,7 @@ function SearchBar() {
                         <TextField
                             {...params}
                             label='Buscar...'
-                            sx={{ width: 220, mb: 2, mt: 2, display: 'flex', justifyContent: 'center' }}
+                            sx={{ width: 220, mb: 2, mt: 2, display: 'flex', justifyContent: 'center', color:'white' }}
                             color='info'
                             value={searchTerm}
                             variant='standard'
@@ -102,16 +103,19 @@ function SearchBar() {
                             InputProps={{
                                 sx: {
                                     borderRadius: 1,
-                                },
+                                    color:'white',
+                                },          
                                 ...params.InputProps,
                                 endAdornment: (
+                                 
                                     <InputAdornment>
                                         <SearchIcon
                                             sx={{
                                                 pb: 0.1,
                                                 ml: 1,
-                                                color: 'info.main',
+                                                color: 'white',
                                             }}
+                                       
                                         />
                                     </InputAdornment>
                                 ),

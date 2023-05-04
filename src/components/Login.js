@@ -8,6 +8,7 @@ import { getDownloadURL, uploadBytes, ref as sRef } from '@firebase/storage';
 import { updateProfile } from 'firebase/auth';
 import { IconButton } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
+import Snackbar from '@mui/material/Snackbar';
 
 const auth = getAuth(app);
 const Login = ({ setUsersmail, setAvatarnav, setNombreLog, setApellidoLog, setTelefonoLog }) => {
@@ -22,6 +23,7 @@ const Login = ({ setUsersmail, setAvatarnav, setNombreLog, setApellidoLog, setTe
     const [nombre, setNombre] = useState(null)
     const [telefono, setTelefono] = useState(null)
     const [apellido, setApellido] = useState(null)
+    const [open, setOpen] = useState(false);
     const navigate = useNavigate();
     const [showPassword, setShowPassword] = useState(false);
 
@@ -69,7 +71,7 @@ const Login = ({ setUsersmail, setAvatarnav, setNombreLog, setApellidoLog, setTe
                 const user = result.user;
                 setLoggedIn(user);
                 formRef.current.reset();
-                alert('Login Successful');
+                setOpen(true);
                 setError('');
             })
             .catch((error) => {
@@ -186,6 +188,15 @@ const Login = ({ setUsersmail, setAvatarnav, setNombreLog, setApellidoLog, setTe
     return (
 
         <Box sx={{ ml: 6, mt: 3, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignContent: 'center' }}>   
+            <Snackbar
+                sx={{backgroundColor:'pop.main', borderRadius:4}}
+                open={open}
+                anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+                autoHideDuration={2400} // ocultar después de 3 segundos
+                onClose={() => setOpen(false)} // cerrar el Snackbar
+                message="Logueado con Exito"
+                
+            />
             {user && avatar && (
                 <Avatar src={avatar} />
             )}
@@ -210,6 +221,7 @@ const Login = ({ setUsersmail, setAvatarnav, setNombreLog, setApellidoLog, setTe
                             name="password"
                             id="password"
                             label="Password"
+                            color='red'
                         />
 
                         <IconButton sx={{mt:1, ml:1}} onClick={() => setShowPassword(!showPassword)}>
@@ -219,7 +231,7 @@ const Login = ({ setUsersmail, setAvatarnav, setNombreLog, setApellidoLog, setTe
                     <p><small className='red'>{error}</small></p>            
                     <Button sx={{ ml: 15, mt: 1, mb: 2 }} onClick={handleLogin} variant='contained' color='info' size='small'>Enviar</Button>
                     <p><small>No tienes cuenta? Crea una... <Link to={'/Register'}>REGISTRARSE</Link></small></p>
-                    <p><small>Olvidaste tu contraseña </small><Button sx={{ ml: 1 }} variant='outlined' color='warning' size='small' onClick={handlerForgetPassword}>Restablecer</Button></p>
+                    <p><small>Olvidaste tu contraseña </small><Button sx={{ ml: 1, backgroundColor:'pop2.main', color:'white' }} variant='contained'  size='small' onClick={handlerForgetPassword}>Restablecer</Button></p>
                     <p><small>Abandonar sesión</small>   <Button sx={{backgroundColor:'red.main', color:'white',ml:2}} variant="contained"  size='small' onClick={handleLogout}>
                         Logout
                     </Button> </p>          

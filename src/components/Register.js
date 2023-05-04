@@ -1,103 +1,108 @@
-import React, { useState } from 'react'
-import { getAuth, createUserWithEmailAndPassword, sendEmailVerification } from "firebase/auth";
-import app from '../utils/Firebase'
+import React, { useState } from 'react';
+import {
+    getAuth,
+    createUserWithEmailAndPassword,
+    sendEmailVerification,
+} from 'firebase/auth';
+import app from '../utils/Firebase';
 import { Link, useNavigate } from 'react-router-dom';
-import Login from './Login';
 import { Input, Button, Box } from '@mui/material';
-
+import { IconButton } from '@mui/material';
+import { Visibility, VisibilityOff } from '@mui/icons-material';
 
 const auth = getAuth(app);
 
 const Register = () => {
-    const navigate = useNavigate();//state for error
+    const navigate = useNavigate();
     const [error, setError] = useState('');
-
-
-    //state for success
-    const [success, setSuccess] = useState('')
+    const [success, setSuccess] = useState('');
     const [form, setForm] = useState(true);
-    //handler for submit registration form
+    const [showPassword, setShowPassword] = useState(false);
+
     const submitHandler = (e) => {
         e.preventDefault();
         let form = e.target;
-    
+        let email = form.email.value;
+        let password = form.password.value;
 
-        let email = form.email.value
-        let password = form.password.value
-
-        // console.log(name, email, password);
-
-        //handle regular expression for password
         if (!/(?=.*[0-9])/.test(password)) {
-
-            setError('Please use atleast a digit..');
+            setError('Please use at least a digit..');
             return;
         }
 
         if (!/(?=.*[!@#$%^&*])/.test(password)) {
-
-            setError('Please use atleast a special character(@,#,$,%,^,&,*,)')
+            setError(
+                'Please use at least a special character(@,#,$,%,^,&,*,)'
+            );
             return;
         }
 
         if (password.length < 8) {
-
-            setError('Please use password length atleast 8')
+            setError('Please use password length at least 8');
             return;
         }
 
-        setError('')
+        setError('');
         createUserWithEmailAndPassword(auth, email, password)
-            .then(result => {
+            .then((result) => {
                 const user = result.user;
                 console.log(user);
                 setSuccess('Registration successful...');
                 form.reset();
                 mailVarification();
-                clear()
+                clear();
             })
-            .catch(err => {
+            .catch((err) => {
+                console.log(err);
+                setError('This username is already Exist! try another one');
+            });
+    };
 
-                console.log(err)
-                setError('This username is already Exist! try another one')
-            })
-    }
-
-    //email varification
     const mailVarification = () => {
-
         sendEmailVerification(auth.currentUser)
             .then(() => {
-
-                alert('Perfecto, Ya Puedes Loguearte Para Ingresar')
+                alert('Perfecto, Ya Puedes Loguearte Para Ingresar');
             })
-            .catch(error => {
-
-                console.error(error)
-            })
-
-    }
+            .catch((error) => {
+                console.error(error);
+            });
+    };
 
     const clear = () => {
         setForm(false);
         console.log('dd');
-    }
-    // const goTo = () => {
-    //     navigate('../pages/home')
+    };
 
-    // }
     return (
-
-        <Box sx={{ml:6,mt:2}}>
-            <form onSubmit={submitHandler} >
-                <h3 >Completa los datos para Registrarte</h3>
-           
-                <Box>  
-                    <Input type="email" name='email' id="formGroupExampleInput2" placeholder="Email" required />
+        <Box sx={{ ml: 6, mt: 2 }}>
+            <form onSubmit={submitHandler}>
+                <h3>Completa los datos para Registrarte</h3>
+                <Box>
+                    <Input
+                        variant="filled"
+                        type="email"
+                        name="email"
+                        id="formGroupExampleInput2"
+                        placeholder="Email"
+                        required
+                    />
                 </Box>
-                <Box >
-                    <Input type="password" name='password'id="formGroupExampleInput3" placeholder="Password" required />
-                    <p><small >{error}</small></p>
+                <Box>
+                    <Input
+                        variant="filled"
+                        type={showPassword ? 'text' : 'password'}
+                        name="password"
+                        id="formGroupExampleInput3"
+                        placeholder="Password"
+                        required
+                    />
+                    <IconButton
+                        sx={{ mt: 1, ml: 1 }}
+                        onClick={() => setShowPassword(!showPassword)}
+                    >
+                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                    <p><small className='error' >{error}</small></p>
                     <p><small >{success}</small></p>
                 </Box>
                 <Button type="submit" variant='contained' size='small' color='info'sx={{ml:15,mt:1,mb:2}} >Enviar</Button>

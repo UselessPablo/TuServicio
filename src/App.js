@@ -23,7 +23,7 @@ function App() {
         main: lightGreen[700],
       },
       info: {
-        main: teal[600],
+        main: teal[900],
       },
       info2: {
         main: teal[300],
@@ -37,6 +37,9 @@ function App() {
       pop:{
         main:orange[400],
       },
+     pop2: {
+       main: orange[600],
+     },
  fondoDrawer: {
          main: teal[200],
        },

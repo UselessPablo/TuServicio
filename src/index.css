@@ -5,7 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: rgba(109, 224, 186, 0.082);
+  background-color: rgba(6, 43, 30, 0.644);
 }
 
 code {
@@ -29,12 +29,14 @@ h2{
   display: none;
 }
 a{
-  color: green;
+  background-color: rgb(15, 129, 15);
   text-decoration: none;
-  border: 1px solid;
-  padding: 5px;
+  padding: 6px;
   border-radius: 4px;
-  
+  margin-left: 4px;
+color: rgb(252, 252, 252);
+font-weight: 400;
+  font-size: 1rem;
 }
 .css-1t1j96h-MuiPaper-root-MuiDialog-paper {
     background-color: #fff;
@@ -93,4 +95,7 @@ a{
 }
 form{
   margin-bottom: 10px;
+}
+.error{
+  color: red;
 }

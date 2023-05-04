@@ -1,5 +1,4 @@
-import { Box, Grid } from '@mui/material';
-import React, { useEffect, useState } from 'react';
+import { Box, CardHeader } from '@mui/material';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
@@ -12,37 +11,38 @@ import ShareIcon from '@mui/icons-material/Share';
 const ItemDetail = ({ data }) => {
 
     return (
-        <Grid container sparcing={1} sx={{ mt: 4, ml: 2 }}>
-            <Grid xs={4} sx={{ display: 'flex', justifyContent: 'center', alignContent: 'center' }}>
-                <Box>
-                    <Card sx={{ maxWidth: 185, backgroundColor: 'primary.main', ml: 2 }}>
-                        <CardMedia
-                            sx={{ height: 160 }}
-                            image={data.imagen}
-                            title={data.categoria}
-                        />
-                        <CardContent sx={{}}>
-                            <Typography gutterBottom variant="h5" component="div">
-                                {data.nombre}
-                            </Typography>
 
-                        </CardContent>
-                        <CardActions>
-                            <Button size="small" variant='contained'><ShareIcon /></Button>
-                            <Button size="small" variant='contained'>contactar</Button>
-                        </CardActions>
-                    </Card>
-                </Box>
-            </Grid>
-            <Grid xs={8} >
-                <Box sx={{ display: 'flex', justifyContent: 'center', flexDirection: 'column', alignContent: 'center', width: '90%' }}>
-                    <Typography variant='h6' textAlign='center' sx={{ width: '100%' }}>  Detalles y habilidades</Typography>
-                    <Typography sx={{ pt: 4, mt: 5, textAlign: 'start', width: '50%', ml: 5 }}>
-                        {data.destrezas}
-                    </Typography>
-                </Box>
-            </Grid>
-        </Grid>
+        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', mt: 3 }}>
+            <Box>
+                <Card sx={{ maxWidth: 185, backgroundColor: 'fondo.main', ml: 2, color: 'white' }}
+                title={data.categoria}
+                >
+                <CardHeader sx={{textAlign:'center'}}
+                title={data.categoria}>
+                </CardHeader>
+                    <CardMedia
+                        sx={{ height: 160 }}
+                        image={data.imagen}
+                        title={data.categoria}
+                    />
+                    <CardContent sx={{}}>
+                        <Typography gutterBottom variant="h5" component="div">
+                            {data.nombre}
+                        </Typography>
+                    </CardContent>
+                    <CardActions sx={{ backgroundColor: 'secondary.main' }}>
+                        <Button size="small" variant='contained'><ShareIcon /></Button>
+                        <Button size="small" variant='contained'>contactar</Button>
+                    </CardActions>
+                </Card>
+            </Box>
+            <Box sx={{ ml: 2 }}>
+                <Typography variant='h6' textAlign='center' marginBottom='80px'>  Detalles y habilidades</Typography>
+                <Typography sx={{ pt: 4, mt: 5, textAlign: 'center' }}>
+                    {data.destrezas}
+                </Typography>
+            </Box>
+        </Box>
     );
 };
 
