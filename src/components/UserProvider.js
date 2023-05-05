@@ -4,92 +4,41 @@ import { setDoc, doc, getDoc } from 'firebase/firestore';
 import { getFirestore} from 'firebase/firestore';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import app from '../utils/Firebase'
+import { deleteDoc, collection, getDocs } from 'firebase/firestore';
 
-const userContext = React.createContext();
+export const userContext = React.createContext();
 
-const firestore = getFirestore();
-const auth = getAuth();
+
+
 export const useFavoriteContext = () => {
   return useContext(userContext)
 }
 
 export const UserProvider = ({ children }) => {
-  const [favoritos, setFavoritos] = useState([])
-  
-  const handleFavoriteClick = async (id, nombre, imagen, categoria) => {
-    const user = auth.currentUser;
-    if (!user) {
-      // Si no hay un usuario autenticado, no se pueden agregar favoritos.
-      console.log('Debes iniciar sesión para agregar favoritos.');
-      return;
-    }
-    
-    const userRef = doc(firestore, 'users', user.uid);
-    const docSnap = await getDoc(userRef);
-    const userData = docSnap.data() || {};
-    const { favoritos = {} } = userData;
-    const isCurrentlyFavorite = !!favoritos[id];
-    setFavoritos((prevFavorites) => ({
-      ...prevFavorites,
-      [id]: {
-        id,
-        nombre,
-        imagen,
-        categoria,
-        isFavorite: !isCurrentlyFavorite
-      },
-    }));
-    await setDoc(userRef, {
-      favoritos: {
-        ...favoritos,
-        [id]: {
-          id,
-          nombre,
-          imagen,
-          categoria,
-          isFavorite: !isCurrentlyFavorite
-        },
-      },
-    }, { merge: true });
-  };
-  const handleDeleteFavorite = async (id) => {
-    const user = auth.currentUser;
-    if (!user) {
-      console.log('Debes iniciar sesión para eliminar favoritos.');
-      return;
-    }
+  const [favoritos, setFavoritos] = useState([]);
 
-    const userRef = doc(firestore, 'users', user.uid);
-    const docSnap = await getDoc(userRef);
-    const userData = docSnap.data() || {};
-    const { favoritos = {} } = userData;
-    const newFavorites = { ...favoritos };
-    delete newFavorites[id];
-    setFavoritos(newFavorites);
-    await setDoc(userRef, { favoritos: newFavorites }, { merge: true });
-
-    // Actualiza la lista de favoritos en el estado del componente.
-    setFavoritos(Object.values(newFavorites));
+  const addFavorite = (id, nombre, imagen, categoria) => {
+    const newFavorite = { id, nombre, imagen, categoria };
+    setFavoritos((prevFavorites) => [...prevFavorites, newFavorite]);
   };
-  const handleToggleFavorite = (id) => {
-    const updatedFavorites = favoritos ? [...favoritos] : [];
-    const index = updatedFavorites.findIndex((favorite) => favorite.id === id);
-    if (index > -1) {
-      updatedFavorites.splice(index, 1);
-    } else {
-      const newFavorite = favoritos.find((dato) => dato.id === id);
-      updatedFavorites.push(newFavorite);
-    }
-    setFavoritos(updatedFavorites);
+
+  const handleFavoriteDelete = (id) => {
+    const filteredFavorites = favoritos.filter((favorite) => favorite.id !== id);
+    setFavoritos(filteredFavorites);
   };
 
   return (
-    <userContext.Provider value={{ favoritos, handleFavoriteClick, handleDeleteFavorite, handleToggleFavorite
-     }}>
+    <userContext.Provider
+      value={{
+        favoritos,
+        addFavorite,
+        handleFavoriteDelete,
+      }}
+    >
       {children}
     </userContext.Provider>
+  );
+};
 
-  )
-}
 
 export default UserProvider;

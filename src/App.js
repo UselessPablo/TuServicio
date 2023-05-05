@@ -41,7 +41,7 @@ function App() {
        main: orange[600],
      },
      navbar: {
-       main: cyan[900],
+       main: cyan[700],
      },
  fondoDrawer: {
          main: teal[200],
@@ -56,6 +56,7 @@ function App() {
   })
  
   return (
+
   <UserProvider>
   <ThemeProvider theme={theme}>
     
@@ -63,6 +64,7 @@ function App() {
      
     </ThemeProvider>
     </UserProvider>
+    
   );
 }
 

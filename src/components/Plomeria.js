@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import { Box } from '@mui/material';
+import React, { useEffect, useState, useContext } from 'react'
+import { Box, Button } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
@@ -16,24 +16,26 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import Rating from '@mui/material/Rating';
 import { random } from 'lodash';
-import { useFavoriteContext } from '../components/UserProvider';
-
+import { useFavoriteContext} from '../components/UserProvider';
+import Favorites from '../components/Favorites';
+import { userContext } from '../components/UserProvider';
 
 interface ExpandMoreProps extends IconButtonProps {
     expand: boolean;
 }
 
-const Plomeria = ({ data, isfavorite }) => {
+const Plomeria = ({ data}) => {
+    const user = useContext(userContext);
     const [datos, setDatos] = useState([]);
     const [expanded, setExpanded] = React.useState({});
     const [ratings, setRatings] = React.useState({});
     const [isFavorite, setIsFavorite] = useState({});
-    const { handleFavoriteClick, favoritos } = useFavoriteContext();
-   
+    const { addFavorite} = useFavoriteContext();
+    
        const getRandomColor = () => `#${Math.floor(random(0, 16777215)).toString(16)}`;
     
-    
    
+    
     useEffect(() => {
         setDatos(data);
     }, [data])
@@ -61,23 +63,23 @@ const Plomeria = ({ data, isfavorite }) => {
             [id]: newValue
         }));
     };
- 
-    console.log(isFavorite);
+    console.log(user.mail);
+  
     return (
 
         <>
             <Typography textAlign='center' variant='h6' sx={{ padding: 1, borderRadius: 2, width: '180px', margin: '0 auto', mt: 2 }}> Plomeros</Typography>
             <Box sx={{ display: 'flex', flexWrap: 'wrap', m: 1, justifyContent: 'center' }}>
                 {datos.map((dato) => (
-                    <Box key={dato.id} sx={{ width: '100%', maxWidth: 200, m: 1 }}>
-                        <Card sx={{color:'black'}}>
+                    <Box key={dato?.id} sx={{ width: '100%', maxWidth: 200, m: 1 }}>
+                        <Card sx={{ color: 'black' }}>
                             <CardHeader sx={{ backgroundColor: 'fondoCard.main', color: 'white' }}
                                 avatar={
-                                    <Avatar sx={{ bgcolor: getRandomColor(), width: 30, height: 30 }} aria-label={dato.nombre}>
-                                        {dato.letra}
+                                    <Avatar sx={{ bgcolor: getRandomColor(), width: 30, height: 30 }} aria-label={dato?.nombre}>
+                                        {dato?.letra}
                                     </Avatar>
                                 }
-                                title={dato.nombre}
+                                title={dato?.nombre}
                             />
                             <CardMedia component="img" height="194" image={dato.imagen} alt={dato.nombre} />
                             <CardContent sx={{ overflow: 'auto', maxHeight: '250px', backgroundColor: 'fondoDrawer.main' }}>
@@ -97,19 +99,26 @@ const Plomeria = ({ data, isfavorite }) => {
                                 />
                             </CardContent>
                             <CardActions disableSpacing sx={{ backgroundColor: 'secondary.main' }}>
-                                <FavoriteIcon
-                                    aria-label="add to favorites"
-                                    onClick={() => {
-                                        handleFavoriteClick(dato.id, dato.nombre, dato.imagen, dato.categoria);
-                                        setIsFavorite((prevIsFavorite) => ({
-                                            ...prevIsFavorite,
-                                            [dato.id]: !prevIsFavorite[dato.id]
-                                        }));
-                                    }}
-
-                                    className={isFavorite[dato.id] ? 'favorite-button-selected' : 'favorite-button'}
-                                >
-                                </FavoriteIcon> 
+                                {user && (
+                                    <FavoriteIcon
+                                        aria-label="add to favorites"
+                                        onClick={() => {
+                                            addFavorite(
+                                                dato.id,
+                                                dato.nombre,
+                                                dato.imagen,
+                                                dato.categoria
+                                            );
+                                            setIsFavorite((prevIsFavorite) => ({
+                                                ...prevIsFavorite,
+                                                [dato.id]: !prevIsFavorite[dato.id],
+                                            }));
+                                        }}
+                                        className={isFavorite[dato.id] ? 'favorite-button-selected' : 'favorite-button'}
+                                    >
+                                    </FavoriteIcon>
+                                )}
+                             
                                 <ExpandMore 
                                     expand={expanded[dato.id] || false}
                                     onClick={() => handleExpandClick(dato.id)}

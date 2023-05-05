@@ -95,7 +95,7 @@ const handleClose = () =>{
                     <Typography variant="h1" fontSize='1.4rem' component="div" fontWeight='bold' color='whitesmoke' sx={{ flexGrow: 1, ml: 2,mt:1 }}>
                         TuServicio
                     </Typography>
-                
+                <Favorites/>
                     <Box sx={{ ml: 4, display: 'flex', flexDirection: 'column-reverse', justifyContent: 'center' }}>
                         <Button onClick={register} color="success" variant='contained' size='small' sx={{ maxHeight: 27, padding: 1, mt: 1, width: '50%' }}>Login</Button>
                         <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignContent: 'center' }}>

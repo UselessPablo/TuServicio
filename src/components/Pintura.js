@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import {useEffect, useState, useContext} from 'react';
 import { Box } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
@@ -15,6 +15,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Rating from '@mui/material/Rating';
 import { random } from 'lodash';
 import { useFavoriteContext } from '../components/UserProvider';
+import {userContext} from './UserProvider';
 
 
 interface ExpandMoreProps extends IconButtonProps {
@@ -26,8 +27,8 @@ const Pintura = ({ data, isfavorite }) => {
     const [expanded, setExpanded] = React.useState({});
     const [ratings, setRatings] = React.useState({});
     const [isFavorite, setIsFavorite] = useState({});
-    const { handleFavoriteClick, favoritos } = useFavoriteContext();
-
+    const { addFavorite} = useFavoriteContext();
+ const user = useContext(userContext);
     const getRandomColor = () => `#${Math.floor(random(0, 16777215)).toString(16)}`;
 
 
@@ -95,19 +96,25 @@ const Pintura = ({ data, isfavorite }) => {
                                 />
                             </CardContent>
                             <CardActions disableSpacing sx={{ backgroundColor: 'secondary.main' }}>
-                                <FavoriteIcon
-                                    aria-label="add to favorites"
-                                    onClick={() => {
-                                        handleFavoriteClick(dato.id, dato.nombre, dato.imagen, dato.categoria);
-                                        setIsFavorite((prevIsFavorite) => ({
-                                            ...prevIsFavorite,
-                                            [dato.id]: !prevIsFavorite[dato.id]
-                                        }));
-                                    }}
-
-                                    className={isFavorite[dato.id] ? 'favorite-button-selected' : 'favorite-button'}
-                                >
-                                </FavoriteIcon>
+                                {user && (
+                                    <FavoriteIcon
+                                        aria-label="add to favorites"
+                                        onClick={() => {
+                                            addFavorite(
+                                                dato.id,
+                                                dato.nombre,
+                                                dato.imagen,
+                                                dato.categoria
+                                            );
+                                            setIsFavorite((prevIsFavorite) => ({
+                                                ...prevIsFavorite,
+                                                [dato.id]: !prevIsFavorite[dato.id],
+                                            }));
+                                        }}
+                                        className={isFavorite[dato.id] ? 'favorite-button-selected' : 'favorite-button'}
+                                    >
+                                    </FavoriteIcon>
+                                )}
                                 <ExpandMore
                                     expand={expanded[dato.id] || false}
                                     onClick={() => handleExpandClick(dato.id)}

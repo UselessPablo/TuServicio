@@ -4,99 +4,55 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import { Badge, Box, Typography, Button, Modal, Avatar } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
-import {getFirestore, doc, getDoc, setDoc} from 'firebase/firestore';
-
+import { getFirestore, doc, getDoc, setDoc } from 'firebase/firestore';
+import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
 const firestore = getFirestore();
 const auth = getAuth();
+
 function Favorites() {
-    const { favoritos } = useFavoriteContext();
+    const { favoritos, handleFavoriteDelete, } = useFavoriteContext();
     const [favorites, setFavorites] = useState([]);
-    const [open, setOpen] = useState(false)
+    const [open, setOpen] = useState(false);
+    const [userLoggedIn, setUserLoggedIn] = useState(false); // variable que indica si el usuario está logueado o no
 
     useEffect(() => {
-        if (favoritos) {
-            setFavorites(Object.values(favoritos));
-        }
-    }, [favoritos]);
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                setUserLoggedIn(true);
+                const userRef = doc(firestore, 'users', user.uid);
+                getDoc(userRef).then((docSnap) => {
+                    const userData = docSnap.data() || {};
+                    const { favoritos = {} } = userData;
+                    setFavorites(Object.values(favoritos));
+                    favoritos(favorites.id);
+                });
+            } else {
+                setUserLoggedIn(false);
+                setFavorites([]);
+                favoritos([]);
+            }
+        });
+    }, []);
 
     const handleClose = () => {
-        setOpen(false)
-    }
+        setOpen(false);
+    };
 
     const handleOpen = () => {
         setOpen(true);
     };
 
-    const handleDelete = (id) => {
-        handleDeleteFavorite(id).then(() => {
-            const updatedFavorites = favorites.filter(favorite => favorite.id !== id);
-            setFavorites(updatedFavorites);
-        });
-    };
-    const handleDeleteFavorite = async (id) => {
-        const user = auth.currentUser;
-        if (!user) {
-            console.log('Debes iniciar sesión para eliminar favoritos.');
-            return;
-        }
-
-        const userRef = doc(firestore, 'users', user.uid);
-        const docSnap = await getDoc(userRef);
-        const userData = docSnap.data() || {};
-        const { favoritos = {} } = userData;
-        const newFavorites = { ...favoritos };
-        delete newFavorites[id];
-        await setDoc(userRef, { favoritos: newFavorites }, { merge: true });
-
-        // Actualiza la lista de favoritos en el estado del componente.
-        const updatedFavorites = Object.values(newFavorites);
-        setFavorites(updatedFavorites);
-    };
-
-    const handleToggleFavorite = async (id) => {
-        const user = auth.currentUser;
-        if (!user) {
-            console.log('Debes iniciar sesión para agregar favoritos.');
-            return;
-        }
-
-        const userRef = doc(firestore, 'users', user.uid);
-        const docSnap = await getDoc(userRef);
-        const userData = docSnap.data() || {};
-        const { favoritos = {} } = userData;
-        const isCurrentlyFavorite = !!favoritos[id];
-        await setDoc(userRef, {
-            favoritos: {
-                ...favoritos,
-                [id]: {
-                    ...favoritos[id],
-                    isFavorite: !isCurrentlyFavorite
-                },
-            },
-        }, { merge: true });
-
-        // Actualiza el estado local de favoritos.
-        const updatedFavorites = Object.values(favoritos).map((favorite) => {
-            if (favorite.id === id) {
-                return {
-                    ...favorite,
-                    isFavorite: !isCurrentlyFavorite
-                };
-            }
-            return favorite;
-        });
-        setFavorites(updatedFavorites);
-    };
-
-   
+  
 
     return (
-        <Box sx={{ display: 'flex', justifyContent: 'center' }} >
-            <Button onClick={handleOpen}>
-                <Badge badgeContent={favorites.length} color="red">
-                    <FavoriteIcon color={open ? 'success' : 'success'} />
-                </Badge>
-            </Button>
+        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+            {userLoggedIn && ( // se agrega una condición para mostrar los favoritos solo si el usuario está logueado
+                <Button onClick={handleOpen}>
+                    <Badge badgeContent={favoritos.length} color="red">
+                        <FavoriteIcon color={open ? 'info' : 'grey'} />
+                    </Badge>
+                </Button>
+            )}
             <Modal
                 sx={{ display: 'flex', justifyContent: 'center', minWidth: '80vw' }}
                 open={open}
@@ -104,24 +60,23 @@ function Favorites() {
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
             >
-                <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', backgroundColor: 'white', width: '80vw', height: '50%', p: 3, mt:5 }}>
+                <Box sx={{ display: 'flex', justifyContent: 'start', alignItems: 'center', flexDirection: 'column', backgroundColor: 'white', width: '80vw', height: '50%', p: 3, mt:5 }}>
                     <Typography variant="h5" component="h2" sx={{ my: 2 }}>
                         Favoritos
                     </Typography>
                     {favorites.length > 0 && (
-                        <Box  >
-                            {favorites.map((favorite) => (
-                                <Box key={favorite.id}>
-                                    {favorite && (
-                                        <Box sx={{ display: 'flex', flexDirection: 'row' }}>
-                                            <Link className='favoritos' to={`/detalle/${favorite.id}`} onClick={() => { handleClose && handleClose() }}>
-                                                <Typography>{favorite.nombre}</Typography>
-                                                <Typography sx={{ margin: 1, color: 'black' }}>{favorite.categoria}</Typography>
-                                                <Avatar variant='rounded' src={favorite.imagen} sx={{ mr: 1 }} />
-                                            </Link>
-                                            <Button onClick={() => handleDelete(favorite.id)}>eliminar</Button>
-                                        </Box>
-                                    )}
+                        <Box sx={{display:'flex', flexDirection:'column', alignItems:'center'}}  >
+                            {favoritos.map((favorite) => (
+                                <Box key={favorite.id} sx={{display:'flex', alignItems:'center', }}>
+                                    <Link className='favoritos' to={`/detalle/${favorite.id}`}>
+                                        <Avatar src={favorite.imagen} alt={favorite.nombre} variant='rounded' />
+                                    <Box>{favorite.nombre}</Box>
+                                    <Box>{favorite.categoria}</Box>
+                                    </Link>
+                                    <Button size='small'  onClick={() => handleFavoriteDelete(favorite.id)}>
+                                      <RemoveCircleOutlineIcon color='red'/>
+                                       
+                                    </Button>
                                 </Box>
                             ))}
                         </Box>

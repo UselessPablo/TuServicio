@@ -5,7 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: rgba(171, 253, 225, 0.644);
+  background-color: rgba(202, 255, 237, 0.644);
 }
 
 code {
@@ -84,6 +84,7 @@ font-weight: 400;
   flex-direction: row-reverse;
   align-items: center;
   margin: 4px;
+  background-color: transparent;
 
 
 }
@@ -106,4 +107,7 @@ form{
   justify-content: center;
   align-items: center;
   font-weight: bold;
+}
+img{
+  width: 10%;
 }

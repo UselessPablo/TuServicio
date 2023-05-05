@@ -10,16 +10,17 @@ import { IconButton } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import Snackbar from '@mui/material/Snackbar';
 
+
 const auth = getAuth(app);
 const Login = ({ setUsersmail, setAvatarnav, setNombreLog, setApellidoLog, setTelefonoLog }) => {
-
+    
     const [error, setError] = useState('');
     const [email, setMail] = useState('');
     const [file, setFile] = useState(null);
     const [loggedIn, setLoggedIn] = useState(false);
     const formRef = useRef(null);
+    const [user, setUser] = useState(null)
     const [avatar, setAvatar] = useState(null);
-    const [user, setUser] = useState(null);
     const [nombre, setNombre] = useState(null)
     const [telefono, setTelefono] = useState(null)
     const [apellido, setApellido] = useState(null)
@@ -184,7 +185,7 @@ const Login = ({ setUsersmail, setAvatarnav, setNombreLog, setApellidoLog, setTe
                 setError(error.message);
             });
     };
-
+console.log(user);
     return (
 
         <Box sx={{ ml: 6, mt: 3, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignContent: 'center' }}>   

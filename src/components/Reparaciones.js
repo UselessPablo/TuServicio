@@ -1,6 +1,6 @@
 import React from 'react'
 import { Box, Typography, Card, CardHeader, CardActions, CardMedia, CardContent, Collapse, IconButton, IconButtonProps, styled, Avatar } from '@mui/material';
-import { useState, useEffect } from 'react';
+import {useState, useEffect, useContext} from 'react';
 import { random } from 'lodash';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
@@ -8,15 +8,17 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import Rating from '@mui/material/Rating';
 import { useFavoriteContext } from '../components/UserProvider';
+import {userContext} from './UserProvider';
 
 const Reparaciones = ({ data}) => {
 
+    const user = useContext(userContext);
     const [datos, setDatos] = useState([]);
     const [expanded, setExpanded] = useState({});
     const [ratings, setRatings] = useState({});
     const getRandomColor = () => `#${Math.floor(random(0, 16777215)).toString(16)}`;
     const [isFavorite, setIsFavorite] = useState({});
-    const { handleFavoriteClick, favoritos } = useFavoriteContext();
+    const { addFavorite } = useFavoriteContext();
     useEffect(() => {
         setDatos(data);
     }, [data])
@@ -84,20 +86,25 @@ const Reparaciones = ({ data}) => {
                                 />
                             </CardContent>
                             <CardActions disableSpacing sx={{ backgroundColor: 'secondary.main' }}>
-                                <FavoriteIcon
-                                    aria-label="add to favorites"
-                                    onClick={() => {
-                                        handleFavoriteClick(dato.id, dato.nombre, dato.imagen, dato.categoria);
-                                        setIsFavorite((prevIsFavorite) => ({
-                                            ...prevIsFavorite,
-                                            [dato.id]: !prevIsFavorite[dato.id]
-                                        }));
-                                    }}
-
-                                    className={isFavorite[dato.id] ? 'favorite-button-selected' : 'favorite-button'}
-                                >
-
-                                </FavoriteIcon> 
+                                {user && (
+                                    <FavoriteIcon
+                                        aria-label="add to favorites"
+                                        onClick={() => {
+                                            addFavorite(
+                                                dato.id,
+                                                dato.nombre,
+                                                dato.imagen,
+                                                dato.categoria
+                                            );
+                                            setIsFavorite((prevIsFavorite) => ({
+                                                ...prevIsFavorite,
+                                                [dato.id]: !prevIsFavorite[dato.id],
+                                            }));
+                                        }}
+                                        className={isFavorite[dato.id] ? 'favorite-button-selected' : 'favorite-button'}
+                                    >
+                                    </FavoriteIcon>
+                                )}
                                 <ExpandMore
                                     expand={expanded[dato.id] || false}
                                     onClick={() => handleExpandClick(dato.id)}
