@@ -29,7 +29,7 @@ const GoogleAuth = ({ setUser }) => {
 
     return (
         <Box>
-            <Button sx={{color:'black', backgroundColor:'secondary.main', mt:3,ml:2}} onClick={handleLogin}> Logueate con <GoogleIcon color='success'/>oogle</Button>
+            <Button sx={{color:'white', backgroundColor:'fondoCard.main', mt:3,ml:2}} onClick={handleLogin}> Logueate con  <GoogleIcon color='grey'/>oogle</Button>
         </Box>
     );
 };

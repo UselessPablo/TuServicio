@@ -1,12 +1,13 @@
 import React from 'react'
 
-import { Grid, Box, Button } from '@mui/material'
+import { Grid, Box, Button, Typography } from '@mui/material'
 import ConstructionRoundedIcon from '@mui/icons-material/ConstructionRounded';
 import WaterDropRoundedIcon from '@mui/icons-material/WaterDropRounded';
 import PropaneTankRoundedIcon from '@mui/icons-material/PropaneTankRounded';
 import BuildRoundedIcon from '@mui/icons-material/BuildRounded';
 import FormatPaintRoundedIcon from '@mui/icons-material/FormatPaintRounded';
 import { useNavigate } from 'react-router-dom';
+import DetalleBest from '../components/DetalleBest';
 import Carrousel from '../components/Carrousel';
 
 
@@ -28,9 +29,11 @@ const Home = () => {
   }
   return (
     <>
-
-<Carrousel/>
+      
+<DetalleBest/>
    
+   
+   <Carrousel/>
       <Grid container spacing={3} sx={{ pr: 3, pl: 3, mt: 4 }}>
         <Grid item xs={6}  >
           <Box sx={{ backgroundColor: 'blue', height: 200, mt: 1, display: "flex", justifyContent: "center", alignItems: 'center', borderRadius: 4 }}>

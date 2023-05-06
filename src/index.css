@@ -111,6 +111,8 @@ form{
 img{
   width: 10%;
 }
-.slide{
-  max-height: 30px;
+.imgCenter{
+  display: flex;
+  justify-content: center;
+  width: 80px;
 }

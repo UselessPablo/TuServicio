@@ -12,6 +12,7 @@ import Login from '../components/Login'
 import Register from '../components/Register';
 import { useState } from 'react';
 
+
 const Router = () => {
 
 const [avatar, setAvatar] = useState(null);
