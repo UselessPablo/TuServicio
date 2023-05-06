@@ -7,6 +7,7 @@ import PropaneTankRoundedIcon from '@mui/icons-material/PropaneTankRounded';
 import BuildRoundedIcon from '@mui/icons-material/BuildRounded';
 import FormatPaintRoundedIcon from '@mui/icons-material/FormatPaintRounded';
 import { useNavigate } from 'react-router-dom';
+import Carrousel from '../components/Carrousel';
 
 
 const Home = () => {
@@ -28,6 +29,8 @@ const Home = () => {
   return (
     <>
 
+<Carrousel/>
+   
       <Grid container spacing={3} sx={{ pr: 3, pl: 3, mt: 4 }}>
         <Grid item xs={6}  >
           <Box sx={{ backgroundColor: 'blue', height: 200, mt: 1, display: "flex", justifyContent: "center", alignItems: 'center', borderRadius: 4 }}>
@@ -71,6 +74,7 @@ const Home = () => {
         </Grid>
 
       </Grid>
+    
     </>
   )
 }

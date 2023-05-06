@@ -1,5 +1,6 @@
 
 import './App.css';
+import { AuthProvider } from './components/Auth';
 import { UserProvider } from './components/UserProvider';
 import Router from './utils/Router';
 import {teal, green, lime, yellow, lightGreen, grey, orange, red, cyan} from '@mui/material/colors';
@@ -56,15 +57,17 @@ function App() {
   })
  
   return (
-
+    <AuthProvider>
   <UserProvider>
+     
   <ThemeProvider theme={theme}>
     
         <Router  />
      
     </ThemeProvider>
+      
     </UserProvider>
-    
+     </AuthProvider>
   );
 }
 

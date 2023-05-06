@@ -3,7 +3,7 @@
 import * as firebase from 'firebase/app'
 import {getStorage} from '@firebase/storage';
 import 'firebase/auth';
-
+import { getAuth } from 'firebase/auth';
 
 
     const app = firebase.initializeApp({
@@ -16,10 +16,7 @@ import 'firebase/auth';
 });
 
 
-
+export const auth = getAuth()
 export default app;
  export const storage = getStorage(app);
 
-
-
- 

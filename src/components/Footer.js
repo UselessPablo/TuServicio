@@ -4,7 +4,7 @@ import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 
 const Footer = () => {
   return (
-    <Box sx={{display:'flex', justifyContent:'space-evenly', alignItems:'center'}}>
+    <Box sx={{display:'flex', justifyContent:'space-evenly', alignItems:'center',  mt:15}}>
   <Box>
               <Box>
                   <a className='whats' href='https://wa.me/+5492944895986' target='_blank' rel="noreferrer" >

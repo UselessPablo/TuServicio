@@ -17,13 +17,13 @@ import PropaneTankRoundedIcon from '@mui/icons-material/PropaneTankRounded';
 import BuildRoundedIcon from '@mui/icons-material/BuildRounded';
 import FormatPaintRoundedIcon from '@mui/icons-material/FormatPaintRounded';
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate} from 'react-router-dom';
 import SearchBar from './SearchBar';
-import { Avatar, Badge, Menu, MenuItem } from '@mui/material';
-import { useState, useEffect } from 'react';
+import { Avatar} from '@mui/material';
+import { useState} from 'react';
 import { Dialog, DialogTitle, DialogContent, DialogActions } from '@mui/material';
 import Favorites from '../components/Favorites';
-import FavoriteIcon from '@mui/icons-material/Favorite';
+
 const NavBar = ({ avatar, user, nombre, apellido, telefono }) => {
   
 

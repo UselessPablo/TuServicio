@@ -9,6 +9,7 @@ import { updateProfile } from 'firebase/auth';
 import { IconButton } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import Snackbar from '@mui/material/Snackbar';
+import GoogleAuth from './GoogleAuth';
 
 
 const auth = getAuth(app);
@@ -36,27 +37,27 @@ const Login = ({ setUsersmail, setAvatarnav, setNombreLog, setApellidoLog, setTe
             }
         });
         return unsubscribe;
-    }, []);
+    }, );
 
     useEffect(() => {
         setAvatarnav(avatar)
-    }, [avatar])
+    }, )
 
     useEffect(() => {
         setUsersmail(email)
-    }, [email])
+    }, )
 
     useEffect(() => {
         setNombreLog(nombre)
-    }, [nombre])
+    }, )
 
     useEffect(() => {
         setApellidoLog(apellido)
-    }, [apellido])
+    }, )
 
     useEffect(() => {
         setTelefonoLog(telefono)
-    }, [telefono])
+    }, )
 
     const handleLogin = (e) => {
         e.preventDefault();
@@ -187,8 +188,9 @@ const Login = ({ setUsersmail, setAvatarnav, setNombreLog, setApellidoLog, setTe
     };
 console.log(user);
     return (
-
+       
         <Box sx={{ ml: 6, mt: 3, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignContent: 'center' }}>   
+          
             <Snackbar
                 sx={{backgroundColor:'pop.main', borderRadius:4}}
                 open={open}
@@ -203,7 +205,8 @@ console.log(user);
             )}
             {!loggedIn && (
                 <form ref={formRef} >
-                    <h3 >Ingresa tu usuario y contraseña </h3>
+                    <GoogleAuth/>
+                    <h3 >Ingresa con Email y contraseña </h3>
                     <Box >
                         <TextField
                             variant='filled'
@@ -229,13 +232,17 @@ console.log(user);
                             {showPassword ? <VisibilityOff /> : <Visibility />}
                         </IconButton>
                     </Box>
+                    
                     <p><small className='red'>{error}</small></p>            
-                    <Button sx={{ ml: 15, mt: 1, mb: 2 }} onClick={handleLogin} variant='contained' color='info' size='small'>Enviar</Button>
+                    
+                    <Button onClick={handleLogin} sx={{mb:2}} variant='contained' color='info' size='small'>Enviar</Button>
+                    <Box sx={{ display: 'flex', justifyContent: 'center', flexDirection: 'column' }}>
                     <p><small>No tienes cuenta? Crea una... <Link to={'/Register'}>REGISTRARSE</Link></small></p>
                     <p><small>Olvidaste tu contraseña </small><Button sx={{ ml: 1, backgroundColor:'pop2.main', color:'white' }} variant='contained'  size='small' onClick={handlerForgetPassword}>Restablecer</Button></p>
                     <p><small>Abandonar sesión</small>   <Button sx={{backgroundColor:'red.main', color:'white',ml:2}} variant="contained"  size='small' onClick={handleLogout}>
                         Logout
                     </Button> </p>          
+                    </Box>
                 </form>
             )}
             {loggedIn && (

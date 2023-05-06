@@ -1,10 +1,7 @@
-import React from 'react'
-import { useState, useContext } from 'react'
-import { setDoc, doc, getDoc } from 'firebase/firestore';
-import { getFirestore} from 'firebase/firestore';
-import { getAuth, onAuthStateChanged } from 'firebase/auth';
-import app from '../utils/Firebase'
-import { deleteDoc, collection, getDocs } from 'firebase/firestore';
+import React, { useState, useContext } from 'react';
+import {  deleteDoc, doc } from 'firebase/firestore';
+import { getFirestore } from 'firebase/firestore';
+
 
 export const userContext = React.createContext();
 
@@ -22,9 +19,15 @@ export const UserProvider = ({ children }) => {
     setFavoritos((prevFavorites) => [...prevFavorites, newFavorite]);
   };
 
-  const handleFavoriteDelete = (id) => {
-    const filteredFavorites = favoritos.filter((favorite) => favorite.id !== id);
-    setFavoritos(filteredFavorites);
+  const handleFavoriteDelete = async (id) => {
+    try {
+      const db = getFirestore();
+      await deleteDoc(doc(db, 'favorites', id));
+      const updatedFavorites = favoritos.filter((favorite) => favorite.id !== id);
+      setFavoritos(updatedFavorites);
+    } catch (error) {
+      console.error('Error deleting favorite: ', error);
+    }
   };
 
   return (

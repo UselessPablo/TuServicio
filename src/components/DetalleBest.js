@@ -1,14 +1,14 @@
 import React from 'react'
-import {useState, useEffect} from 'react';
-import {getDocs, collection, query, where} from 'firebase/firestore';
-import app from '../utils/Firebase';
-import Reparaciones from './Reparaciones'
+import { useState, useEffect } from 'react';
+import { getDocs, collection } from 'firebase/firestore';
+import Carrousel from '../components/Carrousel'
 import { getFirestore } from 'firebase/firestore'
 
-const DetalleReparaciones = () => {
+
+const DetalleBest = () => {
     const app = getFirestore();
-      const [data, setData] = useState([]);
-   
+    const [data, setData] = useState([]);
+
     useEffect(() => {
         const coleccionDeEmpleados = collection(app, 'empleados');
         getDocs(coleccionDeEmpleados)
@@ -23,12 +23,13 @@ const DetalleReparaciones = () => {
                 console.log(error);
             });
     }, []);
-  
-    return (
-    <div>
-    <Reparaciones data={data}/>
-    </div>
-  )
-}
+    console.log(data);
 
-export default DetalleReparaciones
+
+    return (
+        <div>
+            <Carrousel data={data} />
+        </div>
+    );
+}
+export default DetalleBest;

@@ -111,3 +111,6 @@ form{
 img{
   width: 10%;
 }
+.slide{
+  max-height: 30px;
+}
