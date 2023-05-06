@@ -90,7 +90,7 @@ const Construccion = ({ data }) => {
                                 </Collapse>
                                 <Rating
                                     name={`rating-${dato.id}`}
-                                    value={ratings[dato.id] || 0}
+                                    value={dato.calificacion}
                                     onChange={(event, newValue) => {
                                         handleRatingChange(dato.id, newValue);
                                     }}

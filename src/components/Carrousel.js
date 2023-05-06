@@ -2,7 +2,7 @@ import React, { Component} from 'react';
 import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { Box, Typography, Rating } from '@mui/material';
+import { Box, Typography, Rating, Card, CardContent, CardMedia, Avatar } from '@mui/material';
 
 class Carrousel extends Component {
  
@@ -13,7 +13,7 @@ class Carrousel extends Component {
             infinite: true,
             speed: 500,
             autoplay: true,
-            autoplaySpeed: 1000,
+            autoplaySpeed: 1800,
             slidesToShow: 3,
             slidesToScroll: 1,
             centerMode: true,
@@ -26,10 +26,16 @@ class Carrousel extends Component {
                 <Slider {...settings}>
                     {data && data.map((item) => (
                         <Box key={item.id}>
-                            <img className='imgCenter' src={item.imagen} alt={item.nombre} />
-                            <Typography textAlign='start' >{item.nombre}</Typography>
+                            <Card sx={{maxWidth:'140px', height:'140px', borderRadius:5}}>
+                            <CardMedia >
+                             <Avatar className='imgCenter' src={item.imagen} alt={item.nombre} />
+                            <Typography textAlign='center' >{item.nombre}</Typography>
+                                </CardMedia>
+                                <CardContent>
                             <Rating value={item.calificacion}></Rating>
-                            <Typography textAlign='start' sx={{ml:2}} >{item.categoria}</Typography>
+                            <Typography textAlign='center'>{item.categoria}</Typography>
+                                </CardContent>
+                            </Card>
                         </Box>
                     ))}
                 </Slider>
