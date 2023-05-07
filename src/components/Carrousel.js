@@ -26,16 +26,16 @@ class Carrousel extends Component {
                 <Slider {...settings}>
                     {data && data.map((item) => (
                         <Box key={item.id}>
-                            <Card sx={{color:'white', minWidth:'140px', maxWidth:'170px', height:'220px', borderRadius:2, mr:4, ml:4, backgroundColor:'eliminar.main'}}>
+                            <Card sx={{color:'white', minWidth:'140px', maxWidth:'170px', height:'200px', borderRadius:2, mr:4, ml:4, backgroundColor:'eliminar.main'}}>
                             <CardMedia sx={{display:'flex', justifyContent:'center', mt:2,mb:2}} >
                              <Avatar variant='rounded' sx={{width:'50px' , backgroundColor:'info2.main', display:'flex',justifyContent:'center' }}  className='imgCenter' src={item.imagen} alt={item.nombre} />
                                 </CardMedia>
-                            <Typography textAlign='center'sx={{mt:1}} >{item.nombre}</Typography>
+                            <Typography textAlign='center'sx={{}} >{item.nombre}</Typography>
                                 
-                                <CardContent sx={{mt:5, display:'flex', justifyContent:'center'}}>
+                                <CardContent sx={{ display:'flex', justifyContent:'center'}}>
                             <Rating value={item.calificacion}></Rating>
                                 </CardContent>
-                            <Typography textAlign='center' sx={{mb:1}}>{item.categoria}</Typography>
+                            <Typography textAlign='center' sx={{}}>{item.categoria}</Typography>
                                
                             </Card>
                         </Box>

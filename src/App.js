@@ -3,7 +3,7 @@ import './App.css';
 import { AuthProvider } from './components/Auth';
 import { UserProvider } from './components/UserProvider';
 import Router from './utils/Router';
-import {teal, green, lime, yellow, lightGreen, grey, orange, red, cyan, purple} from '@mui/material/colors';
+import {teal, green, lime, yellow, lightGreen, grey, orange, red, cyan, blue} from '@mui/material/colors';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 
 
@@ -33,7 +33,7 @@ function App() {
         main: green[700],
       },
       eliminar:{
-        main:purple[700],
+        main:red[300],
       },
       pop:{
         main:orange[300],
