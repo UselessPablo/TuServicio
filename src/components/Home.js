@@ -34,9 +34,9 @@ const Home = () => {
    
    
    <Carrousel/>
-      <Grid container spacing={3} sx={{ pr: 3, pl: 3, mt: 4 }}>
+      <Grid container spacing={3} sx={{ pr: 3, pl: 3, mt: 6 }}>
         <Grid item xs={6}  >
-          <Box sx={{ backgroundColor: 'blue', height: 200, mt: 1, display: "flex", justifyContent: "center", alignItems: 'center', borderRadius: 4 }}>
+          <Box sx={{ backgroundColor: 'lightBlue', height: 200, mt: 1, display: "flex", justifyContent: "center", alignItems: 'center', borderRadius: 4 }}>
             <Button onClick={goToAgua}>
               <span title='Plomería' >
                 <WaterDropRoundedIcon sx={{ width: "70%", height: "80%", color: 'white' }} />
@@ -45,7 +45,7 @@ const Home = () => {
           </Box>
         </Grid>
         <Grid item xs={6}>
-          <Box sx={{ backgroundColor: 'green', height: 200, mt: 1, display: "flex", justifyContent: "center", alignItems: 'center', borderRadius: 4 }}>
+          <Box sx={{ backgroundColor: 'lightGreen', height: 200, mt: 1, display: "flex", justifyContent: "center", alignItems: 'center', borderRadius: 4 }}>
             <Button onClick={goConstruccion}>
               <span title='Construcción'>
                 <ConstructionRoundedIcon sx={{ width: "70%", height: "80%", color: 'white' }} />
@@ -55,7 +55,7 @@ const Home = () => {
 
         </Grid>
         <Grid item xs={6}>
-          <Box sx={{ backgroundColor: 'red.main', height: 200, mb: 1, display: "flex", justifyContent: "center", alignItems: 'center', borderRadius: 4 }}>
+          <Box sx={{ backgroundColor: 'success.main', height: 200, mb: 1, display: "flex", justifyContent: "center", alignItems: 'center', borderRadius: 4 }}>
             <Button onClick={goGasista}>
               <span title='Gasistas' >
                 <PropaneTankRoundedIcon sx={{ width: "70%", height: "80%", color: 'white' }} />

@@ -21,12 +21,12 @@ class Carrousel extends Component {
         };
         return (
          
-            <Box sx={{width:'100vw'}}>
+            <Box sx={{width:'100vw', mt:4}}>
               
                 <Slider {...settings}>
                     {data && data.map((item) => (
                         <Box key={item.id}>
-                            <Card sx={{color:'white', minWidth:'140px', maxWidth:'170px', height:'220px', borderRadius:2, mr:4, ml:4, backgroundColor:'fondo.main'}}>
+                            <Card sx={{color:'white', minWidth:'140px', maxWidth:'170px', height:'220px', borderRadius:2, mr:4, ml:4, backgroundColor:'eliminar.main'}}>
                             <CardMedia sx={{display:'flex', justifyContent:'center', mt:2,mb:2}} >
                              <Avatar variant='rounded' sx={{width:'50px' , backgroundColor:'info2.main', display:'flex',justifyContent:'center' }}  className='imgCenter' src={item.imagen} alt={item.nombre} />
                                 </CardMedia>
