@@ -11,30 +11,32 @@ class Carrousel extends Component {
      
         const settings = {
             infinite: true,
-            speed: 500,
+            speed: 600,
             autoplay: true,
             autoplaySpeed: 1800,
-            slidesToShow: 3,
+            slidesToShow: 4,
             slidesToScroll: 1,
             centerMode: true,
-            centerPadding: '30px',
+            centerPadding: '-160px',
         };
         return (
          
-            <Box>
+            <Box sx={{width:'100vw'}}>
               
                 <Slider {...settings}>
                     {data && data.map((item) => (
                         <Box key={item.id}>
-                            <Card sx={{maxWidth:'140px', height:'140px', borderRadius:5}}>
-                            <CardMedia >
-                             <Avatar className='imgCenter' src={item.imagen} alt={item.nombre} />
-                            <Typography textAlign='center' >{item.nombre}</Typography>
+                            <Card sx={{color:'white', minWidth:'140px', maxWidth:'170px', height:'220px', borderRadius:2, mr:4, ml:4, backgroundColor:'fondo.main'}}>
+                            <CardMedia sx={{display:'flex', justifyContent:'center', mt:2,mb:2}} >
+                             <Avatar variant='rounded' sx={{width:'50px' , backgroundColor:'info2.main', display:'flex',justifyContent:'center' }}  className='imgCenter' src={item.imagen} alt={item.nombre} />
                                 </CardMedia>
-                                <CardContent>
+                            <Typography textAlign='center'sx={{mt:1}} >{item.nombre}</Typography>
+                                
+                                <CardContent sx={{mt:5, display:'flex', justifyContent:'center'}}>
                             <Rating value={item.calificacion}></Rating>
-                            <Typography textAlign='center'>{item.categoria}</Typography>
                                 </CardContent>
+                            <Typography textAlign='center' sx={{mb:1}}>{item.categoria}</Typography>
+                               
                             </Card>
                         </Box>
                     ))}
