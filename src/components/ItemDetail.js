@@ -9,7 +9,21 @@ import ShareIcon from '@mui/icons-material/Share';
 
 
 const ItemDetail = ({ data }) => {
-
+    const handleContactClick = () => {
+        window.open(`tel:${data.contacto}`, '_self');
+    }
+    const handleShareClick = async () => {
+        try {
+            await navigator.share({
+                title: 'Compartir contacto',
+                text: `Contáctame en ${data.contacto}`,
+                url: `tel:${data.contacto}`,
+            });
+        } catch (error) {
+            console.error('Error al compartir:', error);
+            window.open(`https://wa.me/?text=Contáctame en ${data.contacto}`);
+        }
+    };
     return (
 
         <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', mt: 3 }}>
@@ -26,13 +40,13 @@ const ItemDetail = ({ data }) => {
                         title={data.categoria}
                     />
                     <CardContent sx={{}}>
-                        <Typography gutterBottom variant="h5" component="div">
+                        <Typography gutterBottom variant="h5" component="div" textAlign='center'>
                             {data.nombre}
                         </Typography>
                     </CardContent>
                     <CardActions sx={{ backgroundColor: 'secondary.main' }}>
-                        <Button size="small" variant='contained'><ShareIcon /></Button>
-                        <Button size="small" variant='contained'>contactar</Button>
+                        <Button size="small" onClick={handleShareClick} variant='contained'><ShareIcon /></Button>
+                        <Button size="small" onClick={handleContactClick} variant='contained'>contactar</Button>
                     </CardActions>
                 </Card>
             </Box>
