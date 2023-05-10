@@ -34,7 +34,7 @@ const Home = () => {
    
    
    <Carrousel/>
-      <Grid container spacing={3} sx={{ pr: 3, pl: 3, mt: 6 }}>
+      <Grid container spacing={3} sx={{ pr: 3, pl: 3, mt: 1 }}>
         <Grid item xs={6}  >
           <Box sx={{ backgroundColor: 'lightBlue', height: 200, mt: 1, display: "flex", justifyContent: "center", alignItems: 'center', borderRadius: 4 }}>
             <Button onClick={goToAgua}>
