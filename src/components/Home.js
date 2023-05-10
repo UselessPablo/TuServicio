@@ -27,6 +27,9 @@ const Home = () => {
   const goPintura = ()=>{
     navigate('/Pintura')
   }
+  const goReparaciones = ()=>{
+    navigate('/Reparaciones')
+  }
   return (
     <>
       
@@ -64,7 +67,13 @@ const Home = () => {
           </Box>
         </Grid>
         <Grid item xs={6}>
-          <Box sx={{ backgroundColor: 'secondary.main', height: 200, mb: 1, display: "flex", justifyContent: "center", alignItems: 'center', borderRadius: 4 }}>  <BuildRoundedIcon sx={{ width: "70%", height: "80%", color: 'white' }} /> </Box>
+          <Box sx={{ backgroundColor: 'secondary.main', height: 200, mb: 1, display: "flex", justifyContent: "center", alignItems: 'center', borderRadius: 4 }}>
+          <Button onClick={goReparaciones}>
+          <span title='reparaciones'>
+            <BuildRoundedIcon sx={{ width: "70%", height: "80%", color: 'white' }} /> 
+        </span>
+          </Button>
+          </Box>
         </Grid>
         <Grid item xs={12}>
           <Box sx={{ backgroundColor: 'orange', height: 120, mb: 4, display: "flex", justifyContent: "center", alignItems: 'center', borderRadius: 4 }}>  

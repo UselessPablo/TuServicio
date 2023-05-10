@@ -65,7 +65,7 @@ const Pintura = ({ data, isfavorite }) => {
     return (
 
         <>
-            <Typography textAlign='center' variant='h6' sx={{ padding: 1, borderRadius: 2, width: '180px', margin: '0 auto', mt: 2 }}> Plomeros</Typography>
+            <Typography textAlign='center' variant='h6' sx={{ padding: 1, borderRadius: 2, width: '180px', margin: '0 auto', mt: 2 }}> Pintores</Typography>
             <Box sx={{ display: 'flex', flexWrap: 'wrap', mr: 1, justifyContent: 'center' }}>
                 {datos.map((dato) => (
                     <Box key={dato?.id} sx={{ margin: 1 }} >

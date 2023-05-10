@@ -69,8 +69,8 @@ const Construccion = ({ data }) => {
             <Typography textAlign='center' variant='h6' sx={{ padding: 1, borderRadius: 2, width: '180px', margin: '0 auto', mt: 2 }}> Constructores</Typography>
             <Box sx={{ display: 'flex', flexWrap: 'wrap', m: 1, justifyContent: 'center' }}>
                 {datos.map((dato) => (
-                    <Box key={dato.id} sx={{ width: '100%', maxWidth: 200, m: 1 }}>
-                        <Card>
+                    <Box key={dato.id} sx={{ margin: 1 }}>
+                        <Card sx={{ color: 'black', maxWidth: '145px' }}>
                             <CardHeader sx={{ backgroundColor: 'fondoCard.main', color: 'white' }}
                                 avatar={
                                     <Avatar sx={{ bgcolor: getRandomColor(), width: 30, height: 30 }} aria-label={dato.nombre}>
@@ -79,14 +79,14 @@ const Construccion = ({ data }) => {
                                 }
                                 title={dato.nombre}
                             />
-                            <CardMedia component="img" height="194" image={dato.imagen} alt={dato.nombre} />
+                            <CardMedia component="img" height="154" image={dato.imagen} alt={dato.nombre} />
                             <CardContent sx={{ overflow: 'auto', maxHeight: '250px', backgroundColor: 'fondoDrawer.main' }}>
-                                <Typography variant="body2" color="black" fontWeight='bold' textAlign='center' sx={{ mb: 1, mt: 1 }}>
+                                <Typography fontSize='1rem' color="black" fontWeight='bold' textAlign='center'>
                                     {dato.categoria}
                                 </Typography>
                                 <Collapse in={expanded[dato.id] || false} timeout="auto" unmountOnExit >
-                                    <Typography paragraph>Contacto:{dato.contacto}</Typography>
-                                    <Typography variant='body1' sx={{ minHeight: '120px' }} >{dato.destrezas}</Typography>
+                                    <Typography sx={{ mt: 1 }} fontSize='0.8rem' textAlign='center' paragraph>Contacto:{dato.contacto}</Typography>
+                                    <Typography fontSize='1rem' textAlign='center' sx={{ minHeight: '110px' }}  >{dato.destrezas}</Typography>
                                 </Collapse>
                                 <Rating
                                     name={`rating-${dato.id}`}
@@ -96,7 +96,7 @@ const Construccion = ({ data }) => {
                                     }}
                                 />
                             </CardContent>
-                            <CardActions disableSpacing sx={{ backgroundColor: 'secondary.main' }}>
+                            <CardActions disableSpacing sx={{ backgroundColor: 'secondary.main', height:'20px' }}>
                                 {user && (
                                     <FavoriteIcon
                                         aria-label="add to favorites"
