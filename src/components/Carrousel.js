@@ -4,6 +4,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Box, Typography, Rating, Card, CardContent, CardMedia, Avatar } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import { Image } from 'pure-react-carousel';
 
 const Carrousel = ({ data }) => {
     const navigate = useNavigate();
@@ -28,9 +29,9 @@ const Carrousel = ({ data }) => {
             <Slider {...settings}>
                 {data && data.map((item) => (
                     <Box key={item.id}>
-                        <Card onClick={() => handleCardClick(item.id)} sx={{ color: 'white', minWidth: '140px', maxWidth: '170px', height: '200px', borderRadius: 2, mr: 4, ml: 4, backgroundColor: 'eliminar.main' }}>
+                        <Card onClick={() => handleCardClick(item.id)} sx={{ color: 'black', minWidth: '140px', maxWidth: '170px', height: '200px', borderRadius: 2, mr: 4, ml: 4, backgroundColor: 'white' }}>
                             <CardMedia sx={{ display: 'flex', justifyContent: 'center', mt: 2, mb: 2 }} >
-                                <Avatar variant='rounded' sx={{ width: '50px', backgroundColor: 'info2.main', display: 'flex', justifyContent: 'center' }} className='imgCenter' src={item.imagen} alt={item.nombre} />
+                                <img variant='rounded' sx={{ width: '50px', backgroundColor: 'info2.main', display: 'flex', justifyContent: 'center' }} className='imgCenter' src={item.imagen} alt={item.nombre} />
                             </CardMedia>
                             <Typography textAlign='center' sx={{}}>{item.nombre}</Typography>
                             <CardContent sx={{ display: 'flex', justifyContent: 'center' }}>
